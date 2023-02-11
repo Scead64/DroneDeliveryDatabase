@@ -9,7 +9,6 @@ public class Database{
         ArrayList<Equipment> equipment = new ArrayList<Equipment>();
         ArrayList<Member> members = new ArrayList<Member>();
         ArrayList<Order> orders = new ArrayList<Order>();
-        //ArrayList<Review> drones = new ArrayList<Drone>();
         ArrayList<Warehouse> warehouses = new ArrayList<Warehouse>();
 
 
