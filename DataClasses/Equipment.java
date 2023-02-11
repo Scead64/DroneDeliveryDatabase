@@ -13,9 +13,9 @@ public class Equipment {
     String warrantyExp;
 
     
-    public Equipment(String _type, String _city, int _year, int _size, String _description, String _arrivalDate, String _modelNumber, String _serialNumber, int _inventoryID, String _manufacturer, String _warrantyExp){
+    public Equipment(String _type, int _weight, int _year, int _size, String _description, String _arrivalDate, String _modelNumber, String _serialNumber, int _inventoryID, String _manufacturer, String _warrantyExp){
         this.type = _type;
-        this.weight = _city;
+        this.weight = _weight;
         this.year = _year;
         this.size = _size;
         this.description = _description;

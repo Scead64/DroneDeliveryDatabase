@@ -1,8 +1,8 @@
-public class Emplyee extends Person {
+public class Employee extends Person {
     
     String employeeID;
 
-    public Person(String _fname, String _lname, String _address, String _email, String _password, String _phone, String _employeeID){
+    public Employee(String _fname, String _lname, String _address, String _email, String _password, String _phone, String _employeeID){
         this.fname = _fname;
         this.lname = _lname;
         this.address = _address;
