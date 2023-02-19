@@ -1,19 +1,19 @@
 public class Equipment {
     
     String type;
-    int weight;
-    int year;
-    int size;
+    String weight;
+    String year;
+    String size;
     String description;
     String arrivalDate;
     String modelNumber;
     String serialNumber;
-    int inventoryID;    
+    String inventoryID;    
     String manufacturer;
     String warrantyExp;
 
     
-    public Equipment(String _type, int _weight, int _year, int _size, String _description, String _arrivalDate, String _modelNumber, String _serialNumber, int _inventoryID, String _manufacturer, String _warrantyExp){
+    public Equipment(String _type, String _weight, String _year, String _size, String _description, String _arrivalDate, String _modelNumber, String _serialNumber, String _inventoryID, String _manufacturer, String _warrantyExp){
         this.type = _type;
         this.weight = _weight;
         this.year = _year;

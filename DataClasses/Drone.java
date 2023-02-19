@@ -1,19 +1,19 @@
 public class Drone {
     
     String name;
-    int weightCapacity;
-    int year;
-    int maxSpeed;
-    int volumeCapacity;
-    int distaceAutonomy;
+    String weightCapacity;
+    String year;
+    String maxSpeed;
+    String volumeCapacity;
+    String distaceAutonomy;
     String manufacturer;
     Boolean status;
     String warrantyExpirationDate;
     String modelNumber;
     String serialNumber;
-    int fleetID;
+    String fleetID;
     
-    public Drone(String _name, int _weightCapacity, int _year, int _maxSpeed, int _volumeCapacity, int _distaceAutonomy, String _manufacturer, Boolean _status, String _warrantyExpirationDate, String _modelNumber, String _serialNumber, int _fleetID){
+    public Drone(String _name, String _weightCapacity, String _year, String _maxSpeed, String _volumeCapacity, String _distaceAutonomy, String _manufacturer, Boolean _status, String _warrantyExpirationDate, String _modelNumber, String _serialNumber, String _fleetID){
         this.name = _name;
         this.weightCapacity = _weightCapacity;
         this.year = _year;

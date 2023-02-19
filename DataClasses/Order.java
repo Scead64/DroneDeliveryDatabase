@@ -3,11 +3,11 @@ public class Order {
     String description;
     String estimatedDOA;
     String elementType;
-    int orderNumber;
-    int value;
-    int numberOrdered;
+    String orderNumber;
+    String value;
+    String numberOrdered;
     
-    public Order(String _description, String _estimatedDOA, String _elementType, int _orderNumber, int _value, int _numberOrdered){
+    public Order(String _description, String _estimatedDOA, String _elementType, String _orderNumber, String _value, String _numberOrdered){
         this.description = _description;
         this.estimatedDOA = _estimatedDOA;
         this.elementType = _elementType;

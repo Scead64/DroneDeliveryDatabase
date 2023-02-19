@@ -225,6 +225,91 @@ public class Database{
         System.out.println(m.startDate);
     }
 
+    //Warehouse Methods
+
+    public static void addWarehouse(Scanner in){
+        System.out.print("city: ");
+        String city = in.nextLine();
+        System.out.print("address: ");
+        String address = in.nextLine();
+        System.out.print("phone: ");
+        String phone = in.nextLine();
+        System.out.print("Drone Capacity: ");
+        String droneCapacity = in.nextLine();
+        System.out.print("Storage Capacity: ");
+        String storageCapacity = in.nextLine();
+        Warehouse w = new Warehouse(address,city,phone,droneCapacity,storageCapacity);
+        warehouses.add(w);
+    }
+
+    public static void editWarehouse(Scanner in){
+        Warehouse w = searchWarehouses(in);
+        String input;
+        if(w != null){
+            while(true){
+                displayWarehouse(w);
+                System.out.print("Enter field to edit: ");
+                input = in.nextLine();
+                if(input.equalsIgnoreCase("city")){
+                    System.out.println("Enter new data: ");
+                    input = in.nextLine();
+                    w.city = input;
+                } else if(input.equalsIgnoreCase("address")){
+                    System.out.println("Enter new data: ");
+                    input = in.nextLine();
+                    w.address = input;
+                } else if(input.equalsIgnoreCase("phone")){
+                    System.out.println("Enter new data: ");
+                    input = in.nextLine();
+                    w.phone = input;
+                } else if(input.equalsIgnoreCase("Drone Capacity")){
+                    System.out.println("Enter new data: ");
+                    input = in.nextLine();
+                    w.droneCapacity = input;
+                } else if(input.equalsIgnoreCase("Storage Capacity")){
+                    System.out.println("Enter new data: ");
+                    input = in.nextLine();
+                    w.storageCapacity = input;
+                } else {
+                    System.out.println("Error: invalid attribute");
+                }
+
+                System.out.print("Continue? (Y/N) ");
+                input = in.nextLine();
+                if(input.equalsIgnoreCase("Y")){
+                    break;
+                }
+            }
+        }
+    }
+
+    public static void deleteWarehouse(Scanner in){
+        Warehouse w = searchWarehouses(in);
+        if(w != null){
+            warehouses.remove(w);
+        }
+    }
+
+    public static Warehouse searchWarehouses(Scanner in){
+        System.out.print("Enter Warehouse address: ");
+        String input = in.nextLine();
+        for(Warehouse w: warehouses){
+            if(w.address.equals(input)){
+                return w;
+            }
+        }
+        System.out.print("Error: no warehouse with address " + input);
+        return null;
+    }
+
+    public static void displayWarehouse(Warehouse w){
+        System.out.print(w.address + " ");
+        System.out.print(w.city + " ");
+        System.out.print(w.phone + " ");
+        System.out.println(w.droneCapacity);
+    }
+
+
     public static int id_num = 0;
     public static ArrayList<Drone> drones = new ArrayList<Drone>();
     public static ArrayList<Employee> employees = new ArrayList<Employee>();
@@ -300,6 +385,28 @@ public class Database{
                 }
 
             } else if(input.equalsIgnoreCase("Warehouses")){
+                System.out.println("Members:");
+                for(Warehouse w: warehouses){
+                    displayWarehouse(w);
+                }
+                while(true){
+                    System.out.println("Enter 'I' to input new data\n\t'E' to edit existing data\n\t'D' to delete data\n\t'S' to search data\n\t'B' to go back");
+                    input = in.nextLine();
+                    if(input.equalsIgnoreCase("I")){
+                        addWarehouse(in);
+                    } else if (input.equalsIgnoreCase("E")){
+                        editWarehouse(in);
+                    } else if (input.equalsIgnoreCase("D")){
+                        deleteWarehouse(in);
+                    } else if (input.equalsIgnoreCase("S")){
+                        Warehouse w = searchWarehouses(in);
+                        displayWarehouse(w);
+                    } else if (input.equalsIgnoreCase("B")){
+                        break;
+                    } else {
+                        System.out.println("Error: invalid input");
+                    }
+                }
 
             } else if(input.equalsIgnoreCase("Equipments")){
 
