@@ -1,9 +1,8 @@
 public class Member extends Person {
     
-    String userID;
     String startDate;
 
-    public Member(String _fname, String _lname, String _address, String _email, String _password, String _phone, String _userID, String _startDate){
+    public Member(int _userID, String _fname, String _lname, String _address, String _email, String _password, String _phone, String _startDate){
         this.fname = _fname;
         this.lname = _lname;
         this.address = _address;
@@ -15,3 +14,4 @@ public class Member extends Person {
     }
 
 }
+

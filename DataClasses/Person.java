@@ -6,5 +6,5 @@ abstract class Person {
     String email;
     String password;
     String phone;
-
+    int userID;
 }
