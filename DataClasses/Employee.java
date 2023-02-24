@@ -57,7 +57,7 @@ public class Employee extends Person {
                 System.out.println("Error: invalid attribute");
             }
 
-            System.out.print("Enter 'C' to continue ");
+            System.out.print("Enter 'C' to continue editing ");
             input = in.nextLine();
             if(!input.equalsIgnoreCase("C")){
                 break;
