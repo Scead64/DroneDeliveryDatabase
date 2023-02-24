@@ -13,6 +13,7 @@ public class Equipment {
     String inventoryID;    
     String manufacturer;
     String warrantyExp;
+    Warehouse warehouse;
 
     
     public Equipment(String _type, String _weight, String _year, String _size, String _modelNumber, String _serialNumber, String _inventoryID, String _manufacturer, String _arrivalDate, String _warrantyExp, String _description){

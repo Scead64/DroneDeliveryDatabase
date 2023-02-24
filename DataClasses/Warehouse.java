@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class Warehouse {
 
@@ -7,6 +9,8 @@ public class Warehouse {
     String phone;
     String droneCapacity;
     String storageCapacity;
+    ArrayList<Equipment> equipment;
+    ArrayList<Drone> drones;
 
     public Warehouse(String _address, String _city, String _phone, String _droneCapacity, String _storageCapacity) {
         this.address = _address;
@@ -14,6 +18,8 @@ public class Warehouse {
         this.phone = _phone;
         this.droneCapacity = _droneCapacity;
         this.storageCapacity = _storageCapacity;
+        this.equipment = new ArrayList<Equipment>();
+        this.drones = new ArrayList<Drone>();
     }
 
     public void display() {

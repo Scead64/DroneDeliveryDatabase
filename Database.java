@@ -578,10 +578,9 @@ public class Database{
                     }
                 }
             } else if(input.equalsIgnoreCase("Drones")){
-
+                System.out.println("Error: functionality not currently provided");
             } else if(input.equalsIgnoreCase("Orders")){
-
-            //Invalid input case
+                System.out.println("Error: functionality not currently provided");
             } else {
                 System.out.println("Error: invalid input");
             }
