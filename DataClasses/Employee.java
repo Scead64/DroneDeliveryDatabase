@@ -1,9 +1,11 @@
+package DataClasses;
+
 import java.util.Scanner;
 
 public class Employee extends Person {
     
-    String YOE;
-    String salary;
+    public String YOE;
+    public String salary;
 
     public Employee(int _userID, String _fname, String _lname, String _address, String _email, String _password, String _phone, String _YOE, String _salary){
         this.userID = _userID;

@@ -1,13 +1,15 @@
+package DataClasses;
+
 import java.util.Scanner;
 
 public class Order {
     
-    String description;
-    String estimatedDOA;
-    String elementType;
-    String orderNumber;
-    String value;
-    String numberOrdered;
+    public String description;
+    public String estimatedDOA;
+    public String elementType;
+    public String orderNumber;
+    public String value;
+    public String numberOrdered;
     
     public Order(String _description, String _estimatedDOA, String _elementType, String _orderNumber, String _value, String _numberOrdered){
         this.description = _description;

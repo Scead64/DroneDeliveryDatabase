@@ -1,8 +1,10 @@
+package DataClasses;
+
 import java.util.Scanner;
 
 public class Member extends Person {
     
-    String startDate;
+    public String startDate;
 
     public Member(int _userID, String _fname, String _lname, String _address, String _email, String _password, String _phone, String _startDate){
         this.fname = _fname;

@@ -1,16 +1,18 @@
+package DataClasses;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Warehouse {
 
-    String address;
-    String city;
-    String phone;
-    String droneCapacity;
-    String storageCapacity;
-    ArrayList<Equipment> equipment;
-    ArrayList<Drone> drones;
+    public String address;
+    public String city;
+    public String phone;
+    public String droneCapacity;
+    public String storageCapacity;
+    public ArrayList<Equipment> equipment;
+    public ArrayList<Drone> drones;
 
     public Warehouse(String _address, String _city, String _phone, String _droneCapacity, String _storageCapacity) {
         this.address = _address;

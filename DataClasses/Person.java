@@ -1,10 +1,12 @@
+package DataClasses;
+
 abstract class Person {
     
-    String fname;
-    String lname;
-    String address;
-    String email;
-    String password;
-    String phone;
-    int userID;
+    public String fname;
+    public String lname;
+    public String address;
+    public String email;
+    public String password;
+    public String phone;
+    public int userID;
 }

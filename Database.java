@@ -1,6 +1,6 @@
 import java.util.Scanner;
+import DataClasses.*;
 import java.util.ArrayList;
-
 
 public class Database{
 

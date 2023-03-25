@@ -1,19 +1,21 @@
+package DataClasses;
+
 import java.util.Scanner;
 
 public class Equipment {
     
-    String type;
-    String weight;
-    String year;
-    String size;
-    String description;
-    String arrivalDate;
-    String modelNumber;
-    String serialNumber;
-    String inventoryID;    
-    String manufacturer;
-    String warrantyExp;
-    Warehouse warehouse;
+    public String type;
+    public String weight;
+    public String year;
+    public String size;
+    public String description;
+    public String arrivalDate;
+    public String modelNumber;
+    public String serialNumber;
+    public String inventoryID;    
+    public String manufacturer;
+    public String warrantyExp;
+    public Warehouse warehouse;
 
     
     public Equipment(String _type, String _weight, String _year, String _size, String _modelNumber, String _serialNumber, String _inventoryID, String _manufacturer, String _arrivalDate, String _warrantyExp, String _description){

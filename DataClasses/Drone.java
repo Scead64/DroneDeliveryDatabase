@@ -1,19 +1,20 @@
+package DataClasses;
 import java.util.Scanner;
 
 public class Drone {
     
-    String name;
-    String weightCapacity;
-    String year;
-    String maxSpeed;
-    String volumeCapacity;
-    String distaceAutonomy;
-    String manufacturer;
-    Boolean status;
-    String warrantyExpirationDate;
-    String modelNumber;
-    String serialNumber;
-    String fleetID;
+    public String name;
+    public String weightCapacity;
+    public String year;
+    public String maxSpeed;
+    public String volumeCapacity;
+    public String distaceAutonomy;
+    public String manufacturer;
+    public Boolean status;
+    public String warrantyExpirationDate;
+    public String modelNumber;
+    public String serialNumber;
+    public String fleetID;
     
     public Drone(String _name, String _weightCapacity, String _year, String _maxSpeed, String _volumeCapacity, String _distaceAutonomy, String _manufacturer, Boolean _status, String _warrantyExpirationDate, String _modelNumber, String _serialNumber, String _fleetID){
         this.name = _name;

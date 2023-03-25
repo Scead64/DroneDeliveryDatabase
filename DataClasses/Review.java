@@ -1,9 +1,11 @@
+package DataClasses;
+
 import java.util.Scanner;
 
 public class Review {
     
-    String rating;
-    String description;
+    public String rating;
+    public String description;
     
     public Review(String _rating, String _description){
         this.rating = _rating;
