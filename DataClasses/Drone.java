@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Drone {
     
     String name;
@@ -28,4 +30,75 @@ public class Drone {
         this.fleetID = _fleetID;
     }
 
+    public void display() {
+        System.out.println("Name: " + this.name);
+        System.out.println("Weight Capacity: " + this.weightCapacity);
+        System.out.println("Year: " + this.year);
+        System.out.println("Max Speed: " + this.maxSpeed);
+        System.out.println("Volume Capacity: " + this.volumeCapacity);
+        System.out.println("Distance Autonomy: " + this.distaceAutonomy);
+        System.out.println("Manufacturer: " + this.manufacturer);
+        System.out.println("Status: " + this.status);
+        System.out.println("Warranty Expiration Date: " + this.warrantyExpirationDate);
+        System.out.println("Model Number: " + this.modelNumber);
+        System.out.println("Serial Number: " + this.serialNumber);
+        System.out.println("Fleet ID: " + this.fleetID);
+    }
+
+    public void edit(Scanner in) {
+        while (true) {
+            System.out.print("Enter field to edit: ");
+            String input = in.nextLine();
+            System.out.print("Enter new data: ");
+            String data = in.nextLine();
+
+            switch (input.toLowerCase()) {
+                case "name":
+                    this.name = data;
+                    break;
+                case "weight capacity":
+                    this.weightCapacity = data;
+                    break;
+                case "year":
+                    this.year = data;
+                    break;
+                case "max speed":
+                    this.maxSpeed = data;
+                    break;
+                case "volume capacity":
+                    this.volumeCapacity = data;
+                    break;
+                case "distance autonomy":
+                    this.distaceAutonomy = data;
+                    break;
+                case "manufacturer":
+                    this.manufacturer = data;
+                    break;
+                case "status":
+                    this.status = Boolean.valueOf(data);
+                    break;
+                case "warranty expiration date":
+                    this.warrantyExpirationDate = data;
+                    break;
+                case "model number":
+                    this.modelNumber = data;
+                    break;
+                case "serial number":
+                    this.serialNumber = data;
+                    break;
+                case "fleet id":
+                    this.fleetID = data;
+                    break;
+                default:
+                    System.out.println("Error: invalid attribute");
+                    break;
+            }
+
+            System.out.print("Enter 'C' to continue editing ");
+            input = in.nextLine();
+            if (!input.equalsIgnoreCase("C")) {
+                break;
+            }
+        }
+    }
 }
