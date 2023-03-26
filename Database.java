@@ -4,8 +4,6 @@ import DataClasses.*;
 import ManagerClasses.*;
 
 public class Database{
-
-    
     
     public static int id_num = 0;
     public static ArrayList<Drone> drones = new ArrayList<Drone>();
