@@ -183,9 +183,81 @@ public class Database{
                     }
                 }
             } else if(input.equalsIgnoreCase("Drones")){
-                System.out.println("Error: functionality not currently provided");
+                while(true){
+                    System.out.println("Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
+                    input = in.nextLine();
+
+                    if (input.equalsIgnoreCase("Display")){
+                        System.out.println("Equipments:");
+                        for(Drone d: DroneManager.drones){
+                            d.display();
+                        }
+                    } else if(input.equalsIgnoreCase("Input")){
+                        DroneManager.add(in);
+                    } else if (input.equalsIgnoreCase("Search")){
+                        DroneManager.search(in);
+                    } else if (input.equalsIgnoreCase("Select")){
+                        Drone d = DroneManager.select(in);
+                        if(d != null){
+                            System.out.println("Enter 'Edit' to edit\n\t 'Delete' to delete\n\t 'Back' to go back");
+                            input = in.nextLine();
+
+                            if(input.equalsIgnoreCase("Edit")){
+                                d.edit(in);
+                            } else if(input.equalsIgnoreCase("Delete")){
+                                DroneManager.drones.remove(d);
+                            } else {
+                                if(!input.equalsIgnoreCase("Back")){
+                                    System.out.println("Error: invalid input");
+                                }
+                            }
+                        }
+
+                    } else if (input.equalsIgnoreCase("Back")){
+                        break;
+                    
+                    } else {
+                        System.out.println("Error: invalid input");
+                    }
+                }
             } else if(input.equalsIgnoreCase("Orders")){
-                System.out.println("Error: functionality not currently provided");
+                while(true){
+                    System.out.println("Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
+                    input = in.nextLine();
+
+                    if (input.equalsIgnoreCase("Display")){
+                        System.out.println("Equipments:");
+                        for(Order o: OrderManager.orders){
+                            o.display();
+                        }
+                    } else if(input.equalsIgnoreCase("Input")){
+                        OrderManager.add(in);
+                    } else if (input.equalsIgnoreCase("Search")){
+                        OrderManager.search(in);
+                    } else if (input.equalsIgnoreCase("Select")){
+                        Order o = OrderManager.select(in);
+                        if(o != null){
+                            System.out.println("Enter 'Edit' to edit\n\t 'Delete' to delete\n\t 'Back' to go back");
+                            input = in.nextLine();
+
+                            if(input.equalsIgnoreCase("Edit")){
+                                o.edit(in);
+                            } else if(input.equalsIgnoreCase("Delete")){
+                                OrderManager.orders.remove(o);
+                            } else {
+                                if(!input.equalsIgnoreCase("Back")){
+                                    System.out.println("Error: invalid input");
+                                }
+                            }
+                        }
+
+                    } else if (input.equalsIgnoreCase("Back")){
+                        break;
+                    
+                    } else {
+                        System.out.println("Error: invalid input");
+                    }
+                }
             } else {
                 System.out.println("Error: invalid input");
             }
