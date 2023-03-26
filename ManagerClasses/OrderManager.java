@@ -17,9 +17,9 @@ public class OrderManager {
         String elementType = in.nextLine();
         System.out.print("Order Number: ");
         String orderNumber = in.nextLine();
-        System.out.print("value");
+        System.out.print("Value: ");
         String value = in.nextLine();
-        System.out.print("numberOrdered");
+        System.out.print("Number Ordered: ");
         String numberOrdered = in.nextLine();
         Order o = new Order(description, estimatedDOA, elementType, orderNumber, value, numberOrdered);
         orders.add(o);
