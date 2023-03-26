@@ -6,18 +6,15 @@ import ManagerClasses.*;
 public class Database{
     
     public static int id_num = 0;
-    public static ArrayList<Drone> drones = new ArrayList<Drone>();
-    public static ArrayList<Order> orders = new ArrayList<Order>();
 
     public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in);
         String input;
         System.out.println("Hello, welcome to Drone Delivery Services.");
-        System.out.println("Databases are:\n\tEmployees\n\tMembers\n\tWarehouses\n\tEquipment\n\tDrones\n\tOrders\n");
-
 
         while(true){
+            System.out.println("Databases are:\n\tEmployees\n\tMembers\n\tWarehouses\n\tEquipment\n\tDrones\n\tOrders\n");
             System.out.println("Please enter a table to display ('Q' to quit)");
             input = in.nextLine();
 
@@ -32,26 +29,30 @@ public class Database{
                     input = in.nextLine();
 
                     if (input.equalsIgnoreCase("Display")){
-                        System.out.println("Employees:");
-                        for(Employee e: EmployeeManager.employees){
-                            e.display();
-                        }
+                        EmployeeManager.displayAll();
+
                     } else if(input.equalsIgnoreCase("Input")){
                         EmployeeManager.add(in, id_num);
                         id_num++;
+
                     } else if (input.equalsIgnoreCase("Search")){
                         EmployeeManager.search(in);
+
                     } else if (input.equalsIgnoreCase("Select")){
                         Employee e = EmployeeManager.select(in);
+                        
                         if(e != null){
                             System.out.println("Enter 'Edit' to edit employee\n\t 'Delete' to delete employee\n\t 'Back' to go back");
                             input = in.nextLine();
 
                             if(input.equalsIgnoreCase("Edit")){
                                 e.edit(in);
+                        
                             } else if(input.equalsIgnoreCase("Delete")){
                                 EmployeeManager.employees.remove(e);
+                        
                             } else {
+                        
                                 if(!input.equalsIgnoreCase("Back")){
                                     System.out.println("Error: invalid input");
                                 }
@@ -72,10 +73,8 @@ public class Database{
                     input = in.nextLine();
 
                     if (input.equalsIgnoreCase("Display")){
-                        System.out.println("Members:");
-                        for(Member m: MemberManager.members){
-                            m.display();
-                        }
+                        MemberManager.displayAll();
+
                     } else if(input.equalsIgnoreCase("Input")){
                         MemberManager.add(in, id_num);
                         id_num++;
@@ -111,10 +110,7 @@ public class Database{
                     input = in.nextLine();
 
                     if (input.equalsIgnoreCase("Display")){
-                        System.out.println("Warehouses:");
-                        for(Warehouse e: WarehouseManager.warehouses){
-                            e.display();
-                        }
+                        WarehouseManager.displayAll();
                     } else if(input.equalsIgnoreCase("Input")){
                         WarehouseManager.add(in);
                     } else if (input.equalsIgnoreCase("Search")){
@@ -150,10 +146,8 @@ public class Database{
                     input = in.nextLine();
 
                     if (input.equalsIgnoreCase("Display")){
-                        System.out.println("Equipments:");
-                        for(Equipment e: EquipmentManager.equipment){
-                            e.display();
-                        }
+                        EquipmentManager.displayAll();
+
                     } else if(input.equalsIgnoreCase("Input")){
                         EquipmentManager.add(in);
                     } else if (input.equalsIgnoreCase("Search")){
@@ -188,10 +182,8 @@ public class Database{
                     input = in.nextLine();
 
                     if (input.equalsIgnoreCase("Display")){
-                        System.out.println("Equipments:");
-                        for(Drone d: DroneManager.drones){
-                            d.display();
-                        }
+                        DroneManager.displayAll();
+
                     } else if(input.equalsIgnoreCase("Input")){
                         DroneManager.add(in);
                     } else if (input.equalsIgnoreCase("Search")){
@@ -226,10 +218,8 @@ public class Database{
                     input = in.nextLine();
 
                     if (input.equalsIgnoreCase("Display")){
-                        System.out.println("Equipments:");
-                        for(Order o: OrderManager.orders){
-                            o.display();
-                        }
+                        OrderManager.displayAll();
+                        
                     } else if(input.equalsIgnoreCase("Input")){
                         OrderManager.add(in);
                     } else if (input.equalsIgnoreCase("Search")){

@@ -113,4 +113,10 @@ public class EmployeeManager {
             System.out.println("Error: invalid attribute");
         }
     }
+
+    public static void displayAll() {
+        for(Employee e: employees){
+            e.display();
+        }
+    }
 }

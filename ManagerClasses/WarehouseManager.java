@@ -79,4 +79,9 @@ public class WarehouseManager {
         }
     }
 
+    public static void displayAll() {
+        for(Warehouse w: warehouses){
+            w.display();
+        }
+    }
 }

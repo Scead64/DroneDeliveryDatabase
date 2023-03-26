@@ -105,4 +105,10 @@ public class MemberManager {
             System.out.println("Error: invalid attribute");
         }
     }
+
+    public static void displayAll() {
+        for(Member m: members){
+            m.display();
+        }
+    }
 }

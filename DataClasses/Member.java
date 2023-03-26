@@ -1,10 +1,11 @@
 package DataClasses;
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Member extends Person {
     
     public String startDate;
+    public ArrayList<Review> reviews;
 
     public Member(int _userID, String _fname, String _lname, String _address, String _email, String _password, String _phone, String _startDate){
         this.fname = _fname;
@@ -15,6 +16,7 @@ public class Member extends Person {
         this.phone = _phone;
         this.userID = _userID;
         this.startDate = _startDate;
+        this.reviews = new ArrayList<Review>();
     }
 
     public void display(){

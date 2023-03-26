@@ -38,9 +38,9 @@ public class EquipmentManager {
     public static Equipment select(Scanner in){
         System.out.print("Enter Equipment address: ");
         String input = in.nextLine();
-        for(Equipment w: equipment){
-            if(w.serialNumber.equals(input)){
-                return w;
+        for(Equipment e: equipment){
+            if(e.serialNumber.equals(input)){
+                return e;
             }
         }
         System.out.print("Error: no Equipment with serial number " + input);
