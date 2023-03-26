@@ -10,13 +10,13 @@ public class Drone {
     public String volumeCapacity;
     public String distanceAutonomy;
     public String manufacturer;
-    public Boolean status;
+    public String status;
     public String warrantyExpirationDate;
     public String modelNumber;
     public String serialNumber;
     public String fleetID;
     
-    public Drone(String _name, String _weightCapacity, String _year, String _maxSpeed, String _volumeCapacity, String _distanceAutonomy, String _manufacturer, Boolean _status, String _warrantyExpirationDate, String _modelNumber, String _serialNumber, String _fleetID){
+    public Drone(String _name, String _weightCapacity, String _year, String _maxSpeed, String _volumeCapacity, String _distanceAutonomy, String _manufacturer, String _status, String _warrantyExpirationDate, String _modelNumber, String _serialNumber, String _fleetID){
         this.name = _name;
         this.weightCapacity = _weightCapacity;
         this.year = _year;
@@ -77,7 +77,7 @@ public class Drone {
                     this.manufacturer = data;
                     break;
                 case "status":
-                    this.status = Boolean.valueOf(data);
+                    this.status = data;
                     break;
                 case "warranty expiration date":
                     this.warrantyExpirationDate = data;
