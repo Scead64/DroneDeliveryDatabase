@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 import DataClasses.*;
 import ManagerClasses.*;
 
@@ -78,22 +77,28 @@ public class Database{
                     } else if(input.equalsIgnoreCase("Input")){
                         MemberManager.add(in, id_num);
                         id_num++;
+
                     } else if (input.equalsIgnoreCase("Search")){
                         MemberManager.search(in);
+
                     } else if (input.equalsIgnoreCase("Select")){
                         Member m = MemberManager.select(in);
+
                         if(m != null){
-                            System.out.println("Enter 'Edit' to edit\n\t 'Delete' to delete\n\t 'Back' to go back");
+                            System.out.println("Enter 'Edit' to edit\n\t 'Delete' to delete\n\t 'Reviews' to look at reviews \n\t 'Back' to go back");
                             input = in.nextLine();
 
                             if(input.equalsIgnoreCase("Edit")){
                                 m.edit(in);
+
                             } else if(input.equalsIgnoreCase("Delete")){
                                 MemberManager.members.remove(m);
+
                             } else {
                                 if(!input.equalsIgnoreCase("Back")){
                                     System.out.println("Error: invalid input");
                                 }
+
                             }
                         }
 
@@ -219,7 +224,7 @@ public class Database{
 
                     if (input.equalsIgnoreCase("Display")){
                         OrderManager.displayAll();
-                        
+
                     } else if(input.equalsIgnoreCase("Input")){
                         OrderManager.add(in);
                     } else if (input.equalsIgnoreCase("Search")){
