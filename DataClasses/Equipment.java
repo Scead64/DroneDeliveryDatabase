@@ -33,17 +33,18 @@ public class Equipment {
     }
 
     public void display() {
-        System.out.print("Type: " + this.type + " ");
-        System.out.print("Weight: " + this.weight + " ");
-        System.out.print("Year: " + this.year + " ");
-        System.out.print("Size: " + this.size + " ");
-        System.out.print("Model Number: " + this.modelNumber + " ");
-        System.out.print("Serial Number: " + this.serialNumber + " ");
-        System.out.print("inventoryID: " + this.inventoryID + " ");
-        System.out.print("Manufacturer: " + this.manufacturer + " ");
-        System.out.print("Arrival Date: " + this.arrivalDate + " ");
-        System.out.print("Warranty Expiration: " + this.warrantyExp + " ");
+        System.out.println("Type: " + this.type);
+        System.out.println("Weight: " + this.weight);
+        System.out.println("Year: " + this.year);
+        System.out.println("Size: " + this.size);
+        System.out.println("Model Number: " + this.modelNumber);
+        System.out.println("Serial Number: " + this.serialNumber);
+        System.out.println("inventoryID: " + this.inventoryID);
+        System.out.println("Manufacturer: " + this.manufacturer);
+        System.out.println("Arrival Date: " + this.arrivalDate);
+        System.out.println("Warranty Expiration: " + this.warrantyExp);
         System.out.println("Description: " + this.description);
+        System.out.println();
     }
 
     public void edit(Scanner in) {

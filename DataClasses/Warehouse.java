@@ -25,11 +25,12 @@ public class Warehouse {
     }
 
     public void display() {
-        System.out.print("Address: " + this.address + " ");
-        System.out.print("City: " + this.city + " ");
-        System.out.print("Phone: " + this.phone + " ");
-        System.out.print("Drone Capacity: " + this.droneCapacity + " ");
+        System.out.println("Address: " + this.address);
+        System.out.println("City: " + this.city);
+        System.out.println("Phone: " + this.phone);
+        System.out.println("Drone Capacity: " + this.droneCapacity);
         System.out.println("Storage Capacity: " + this.storageCapacity);
+        System.out.println();
     }
 
     public void edit(Scanner in) {

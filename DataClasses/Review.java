@@ -15,6 +15,7 @@ public class Review {
     public void display(){
         System.out.println("Rating: " + this.rating);
         System.out.println("Description: " + this.description);
+        System.out.println();
     }
     
     public void edit(Scanner in){

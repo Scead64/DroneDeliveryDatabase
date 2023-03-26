@@ -44,6 +44,7 @@ public class Drone {
         System.out.println("Model Number: " + this.modelNumber);
         System.out.println("Serial Number: " + this.serialNumber);
         System.out.println("Fleet ID: " + this.fleetID);
+        System.out.println();
     }
 
     public void edit(Scanner in) {

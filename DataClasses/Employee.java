@@ -20,15 +20,16 @@ public class Employee extends Person {
     }
 
     public void display(){
-        System.out.print("UserID: " + this.userID + " ");
-        System.out.print("Fname: " + this.fname + " ");
-        System.out.print("Lnane: " + this.lname + " ");
-        System.out.print("Address: " + this.address + " ");
-        System.out.print("Email: " + this.email + " ");
-        System.out.print("Password: " + this.password + " ");
-        System.out.print("Phone: " + this.phone + " ");
-        System.out.print("YOE: " + this.YOE + " ");
+        System.out.println("UserID: " + this.userID);
+        System.out.println("Fname: " + this.fname);
+        System.out.println("Lnane: " + this.lname);
+        System.out.println("Address: " + this.address);
+        System.out.println("Email: " + this.email);
+        System.out.println("Password: " + this.password);
+        System.out.println("Phone: " + this.phone);
+        System.out.println("YOE: " + this.YOE);
         System.out.println("Salary: " + this.salary);
+        System.out.println();
     }
 
     public void edit(Scanner in){

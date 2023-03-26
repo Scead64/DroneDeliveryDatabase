@@ -21,12 +21,13 @@ public class Order {
     }
 
     public void display(){
-        System.out.print("Description: " + this.description + " ");
-        System.out.print("Estimated DOA: " + this.estimatedDOA + " ");
-        System.out.print("Element Type: " + this.elementType + " ");
-        System.out.print("Order Number: " + this.orderNumber + " ");
-        System.out.print("Value: " + this.value + " ");
+        System.out.println("Description: " + this.description);
+        System.out.println("Estimated DOA: " + this.estimatedDOA);
+        System.out.println("Element Type: " + this.elementType);
+        System.out.println("Order Number: " + this.orderNumber);
+        System.out.println("Value: " + this.value);
         System.out.println("Number Ordered: " + this.numberOrdered);
+        System.out.println();
     }
     
     public void edit(Scanner in){
