@@ -1,11 +1,14 @@
+package ManagerClasses;
 
 import java.util.ArrayList;
-import DroneDeliveryDatabase.Dataclasses.*;
+import java.util.Scanner;
+import DataClasses.Equipment;
+
 
 public class EquipmentManager {
-    private static ArrayList<Equipment> equipment = new ArrayList<Equipment>();
+    public static ArrayList<Equipment> equipment = new ArrayList<Equipment>();
 
-    public static void addEquipment(Scanner in){
+    public static void add(Scanner in){
         System.out.print("Type: ");
         String type = in.nextLine();
         System.out.print("Weight");
@@ -32,7 +35,7 @@ public class EquipmentManager {
         equipment.add(e);
     }
 
-    public static Equipment selectEquipment(Scanner in){
+    public static Equipment select(Scanner in){
         System.out.print("Enter Equipment address: ");
         String input = in.nextLine();
         for(Equipment w: equipment){
@@ -44,7 +47,7 @@ public class EquipmentManager {
         return null;
     }
 
-    public static void searchEquipment(Scanner in){
+    public static void search(Scanner in){
         System.out.print("Enter attribute to search: ");
         String input = in.nextLine();
         System.out.println("Enter data: ");
@@ -79,7 +82,7 @@ public class EquipmentManager {
         }
     }
 
-    public static void displayAllEquipment() {
+    public static void displayAll() {
         for(Equipment e: equipment){
             e.display();
         }

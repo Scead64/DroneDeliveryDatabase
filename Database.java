@@ -1,6 +1,7 @@
 import java.util.Scanner;
-import DataClasses.*;
 import java.util.ArrayList;
+import DataClasses.*;
+import ManagerClasses.*;
 
 public class Database{
 
@@ -280,128 +281,9 @@ public class Database{
         }
     }
 
-    //Equipment methods
-
-    public static void addEquipment(Scanner in){
-        System.out.print("Type: ");
-        String type = in.nextLine();
-        System.out.print("Weight");
-        String weight = in.nextLine();
-        System.out.print("Year");
-        String year = in.nextLine();
-        System.out.print("Size");
-        String size = in.nextLine();
-        System.out.print("Model Number");
-        String modelNumber = in.nextLine();
-        System.out.print("Serial Number");
-        String serialNumber = in.nextLine();
-        System.out.print("Inventory ID");
-        String inventoryID = in.nextLine();
-        System.out.print("Manufacturer");
-        String manufacturer = in.nextLine();
-        System.out.print("Arrival Date");
-        String arrivalDate = in.nextLine();
-        System.out.print("Warranty Expiration");
-        String warrantyExp = in.nextLine();
-        System.out.print("Description");
-        String description = in.nextLine();
-        Equipment e = new Equipment(type, weight, year, size, modelNumber, serialNumber, inventoryID, manufacturer, arrivalDate, warrantyExp, description);
-        equipment.add(e);
-    }
-
-    public static Equipment selectEquipment(Scanner in){
-        System.out.print("Enter Equipment address: ");
-        String input = in.nextLine();
-        for(Equipment w: equipment){
-            if(w.serialNumber.equals(input)){
-                return w;
-            }
-        }
-        System.out.print("Error: no Equipment with serial number " + input);
-        return null;
-    }
-
-    public static void searchEquipment(Scanner in){
-        System.out.print("Enter attribute to search: ");
-        String input = in.nextLine();
-        System.out.println("Enter data: ");
-        String data = in.nextLine();
-
-        if (input.equalsIgnoreCase("Type")) {
-            for(Equipment e: equipment){
-                if(e.type.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if (input.equalsIgnoreCase("Weight")) {
-            for(Equipment e: equipment){
-                if(e.weight.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if (input.equalsIgnoreCase("Year")) {
-            for(Equipment e: equipment){
-                if(e.year.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if (input.equalsIgnoreCase("Size")) {
-            for(Equipment e: equipment){
-                if(e.size.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if (input.equalsIgnoreCase("Model Number")) {
-            for(Equipment e: equipment){
-                if(e.modelNumber.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if (input.equalsIgnoreCase("Serial Number")) {
-            for(Equipment e: equipment){
-                if(e.serialNumber.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if (input.equalsIgnoreCase("Inventory ID")) {
-            for(Equipment e: equipment){
-                if(e.inventoryID.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if (input.equalsIgnoreCase("Manufacturer")) {
-            for(Equipment e: equipment){
-                if(e.manufacturer.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if (input.equalsIgnoreCase("Arrival Date")) {
-            for(Equipment e: equipment){
-                if(e.arrivalDate.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if (input.equalsIgnoreCase("Warranty Expiration")) {
-            for(Equipment e: equipment){
-                if(e.warrantyExp.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if (input.equalsIgnoreCase("Description")) {
-            for(Equipment e: equipment){
-                if(e.description.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else {
-            System.out.println("Error: invalid attribute");
-        }
-    }
-
     public static int id_num = 0;
     public static ArrayList<Drone> drones = new ArrayList<Drone>();
     public static ArrayList<Employee> employees = new ArrayList<Employee>();
-    public static ArrayList<Equipment> equipment = new ArrayList<Equipment>();
     public static ArrayList<Member> members = new ArrayList<Member>();
     public static ArrayList<Order> orders = new ArrayList<Order>();
     public static ArrayList<Warehouse> warehouses = new ArrayList<Warehouse>();
@@ -419,7 +301,7 @@ public class Database{
             input = in.nextLine();
 
             //Exit case
-            if(input.equals("Q")){
+            if(input.equalsIgnoreCase("Q")){
                 break;
 
             //Display tables case
@@ -546,15 +428,15 @@ public class Database{
 
                     if (input.equalsIgnoreCase("Display")){
                         System.out.println("Equipments:");
-                        for(Equipment e: equipment){
+                        for(Equipment e: EquipmentManager.equipment){
                             e.display();
                         }
                     } else if(input.equalsIgnoreCase("Input")){
-                        addEquipment(in);
+                        EquipmentManager.add(in);
                     } else if (input.equalsIgnoreCase("Search")){
-                        searchEquipment(in);
+                        EquipmentManager.search(in);
                     } else if (input.equalsIgnoreCase("Select")){
-                        Equipment e = selectEquipment(in);
+                        Equipment e = EquipmentManager.select(in);
                         if(e != null){
                             System.out.println("Enter 'Edit' to edit\n\t 'Delete' to delete\n\t 'Back' to go back");
                             input = in.nextLine();
@@ -562,7 +444,7 @@ public class Database{
                             if(input.equalsIgnoreCase("Edit")){
                                 e.edit(in);
                             } else if(input.equalsIgnoreCase("Delete")){
-                                equipment.remove(e);
+                                EquipmentManager.equipment.remove(e);
                             } else {
                                 if(!input.equalsIgnoreCase("Back")){
                                     System.out.println("Error: invalid input");
