@@ -2,7 +2,7 @@ package ManagerClasses;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import DataClasses.Equipment;
+import DataClasses.*;
 
 
 public class EquipmentManager {

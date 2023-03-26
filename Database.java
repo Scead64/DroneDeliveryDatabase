@@ -5,288 +5,11 @@ import ManagerClasses.*;
 
 public class Database{
 
-    //Employee methods
-
-    public static void addEmployee(Scanner in){
-        System.out.print("fname: ");
-        String fname = in.nextLine();
-        System.out.print("lname: ");
-        String lname = in.nextLine();
-        System.out.print("address: ");
-        String address = in.nextLine();
-        System.out.print("email: ");
-        String email = in.nextLine();
-        System.out.print("password: ");
-        String password = in.nextLine();
-        System.out.print("phone: ");
-        String phone = in.nextLine();
-        System.out.print("YOE: ");
-        String YOE = in.nextLine();
-        System.out.print("salary: ");
-        String salary = in.nextLine();
-        Employee e = new Employee(id_num, fname, lname, address, email, password, phone, YOE, salary);
-        employees.add(e);
-        id_num++;
-    }
-
-    public static Employee selectEmployee(Scanner in){
-        System.out.print("Enter employee userID: ");
-        String input = in.nextLine();
-        int id;
-        try{
-            id = Integer.parseInt(input);
-            for(Employee e: employees){
-                if(e.userID == id){
-                    return e;
-                }
-            }
-            System.out.print("Error: no employee with id " + id);
-        } catch(NumberFormatException ex) {
-            System.out.print("Error: invalid id " + input);
-        }
-        return null;
-    }
-
-    public static void searchEmployees(Scanner in){
-        System.out.print("Enter attribute to search: ");
-        String input = in.nextLine();
-        System.out.println("Enter data: ");
-        String data = in.nextLine();
-
-        if(input.equalsIgnoreCase("fname")){
-            for(Employee e: employees){
-                if(e.fname.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("lname")){
-            for(Employee e: employees){
-                if(e.lname.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("address")){
-            for(Employee e: employees){
-                if(e.address.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("email")){
-            for(Employee e: employees){
-                if(e.email.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("password")){
-            for(Employee e: employees){
-                if(e.password.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("phone")){
-            for(Employee e: employees){
-                if(e.phone.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("YOE")){
-            for(Employee e: employees){
-                if(e.YOE.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("salary")){
-            for(Employee e: employees){
-                if(e.salary.equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("userID")){
-            for(Employee e: employees){
-                if(String.valueOf(e.userID).equalsIgnoreCase(data)){
-                    e.display();
-                }
-            }
-        } else {
-            System.out.println("Error: invalid attribute");
-        }
-    }
-
-    //Member Methods
-
-    public static void addMember(Scanner in){
-        System.out.print("fname: ");
-        String fname = in.nextLine();
-        System.out.print("lname: ");
-        String lname = in.nextLine();
-        System.out.print("address: ");
-        String address = in.nextLine();
-        System.out.print("email: ");
-        String email = in.nextLine();
-        System.out.print("password: ");
-        String password = in.nextLine();
-        System.out.print("phone: ");
-        String phone = in.nextLine();
-        System.out.print("Start Date: ");
-        String startDate = in.nextLine();
-        Member m = new Member(id_num, fname,lname,address,email,password,phone,startDate);
-        members.add(m);
-        id_num++;
-    }
-
-    public static Member selectMember(Scanner in){
-        System.out.print("Enter member userID: ");
-        String input = in.nextLine();
-        int id;
-        try{
-            id = Integer.parseInt(input);
-            for(Member m: members){
-                if(m.userID == id){
-                    return m;
-                }
-            }
-            System.out.print("Error: no member with id " + id);
-        } catch(NumberFormatException ex) {
-            System.out.print("Error: invalid id " + input);
-        }
-        return null;
-    }
-
-    public static void searchMembers(Scanner in){
-        System.out.print("Enter attribute to search: ");
-        String input = in.nextLine();
-        System.out.println("Enter data: ");
-        String data = in.nextLine();
-
-        if(input.equalsIgnoreCase("fname")){
-            for(Member m: members){
-                if(m.fname.equalsIgnoreCase(data)){
-                    m.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("lname")){
-            for(Member m: members){
-                if(m.lname.equalsIgnoreCase(data)){
-                    m.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("address")){
-            for(Member m: members){
-                if(m.address.equalsIgnoreCase(data)){
-                    m.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("email")){
-            for(Member m: members){
-                if(m.email.equalsIgnoreCase(data)){
-                    m.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("password")){
-            for(Member m: members){
-                if(m.password.equalsIgnoreCase(data)){
-                    m.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("phone")){
-            for(Member m: members){
-                if(m.phone.equalsIgnoreCase(data)){
-                    m.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("Start date")){
-            for(Member m: members){
-                if(m.startDate.equalsIgnoreCase(data)){
-                    m.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("userID")){
-            for(Member m: members){
-                if(m.fname.equalsIgnoreCase(data)){
-                    m.display();
-                }
-            }
-        } else {
-            System.out.println("Error: invalid attribute");
-        }
-    }
-
-    //Warehouse Methods
-
-    public static void addWarehouse(Scanner in){
-        System.out.print("city: ");
-        String city = in.nextLine();
-        System.out.print("address: ");
-        String address = in.nextLine();
-        System.out.print("phone: ");
-        String phone = in.nextLine();
-        System.out.print("Drone Capacity: ");
-        String droneCapacity = in.nextLine();
-        System.out.print("Storage Capacity: ");
-        String storageCapacity = in.nextLine();
-        Warehouse w = new Warehouse(address,city,phone,droneCapacity,storageCapacity);
-        warehouses.add(w);
-    }
-
-    public static Warehouse selectWarehouse(Scanner in){
-        System.out.print("Enter Warehouse address: ");
-        String input = in.nextLine();
-        for(Warehouse w: warehouses){
-            if(w.address.equals(input)){
-                return w;
-            }
-        }
-        System.out.print("Error: no warehouse with address " + input);
-        return null;
-    }
-
-    public static void searchWarehouses(Scanner in){
-        System.out.print("Enter attribute to search: ");
-        String input = in.nextLine();
-        System.out.println("Enter data: ");
-        String data = in.nextLine();
-
-        if(input.equalsIgnoreCase("address")){
-            for(Warehouse w: warehouses){
-                if(w.address.equalsIgnoreCase(data)){
-                    w.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("city")){
-            for(Warehouse w: warehouses){
-                if(w.city.equalsIgnoreCase(data)){
-                    w.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("phone")){
-            for(Warehouse w: warehouses){
-                if(w.phone.equalsIgnoreCase(data)){
-                    w.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("Drone Capacity")){
-            for(Warehouse w: warehouses){
-                if(w.droneCapacity.equalsIgnoreCase(data)){
-                    w.display();
-                }
-            }
-        } else if(input.equalsIgnoreCase("Storage Capacity")){
-            for(Warehouse w: warehouses){
-                if(w.storageCapacity.equalsIgnoreCase(data)){
-                    w.display();
-                }
-            }
-        } else {
-            System.out.println("Error: invalid attribute");
-        }
-    }
-
+    
+    
     public static int id_num = 0;
     public static ArrayList<Drone> drones = new ArrayList<Drone>();
-    public static ArrayList<Employee> employees = new ArrayList<Employee>();
-    public static ArrayList<Member> members = new ArrayList<Member>();
     public static ArrayList<Order> orders = new ArrayList<Order>();
-    public static ArrayList<Warehouse> warehouses = new ArrayList<Warehouse>();
 
     public static void main(String[] args) {
 
@@ -312,15 +35,16 @@ public class Database{
 
                     if (input.equalsIgnoreCase("Display")){
                         System.out.println("Employees:");
-                        for(Employee e: employees){
+                        for(Employee e: EmployeeManager.employees){
                             e.display();
                         }
                     } else if(input.equalsIgnoreCase("Input")){
-                        addEmployee(in);
+                        EmployeeManager.add(in, id_num);
+                        id_num++;
                     } else if (input.equalsIgnoreCase("Search")){
-                        searchEmployees(in);
+                        EmployeeManager.search(in);
                     } else if (input.equalsIgnoreCase("Select")){
-                        Employee e = selectEmployee(in);
+                        Employee e = EmployeeManager.select(in);
                         if(e != null){
                             System.out.println("Enter 'Edit' to edit employee\n\t 'Delete' to delete employee\n\t 'Back' to go back");
                             input = in.nextLine();
@@ -328,7 +52,7 @@ public class Database{
                             if(input.equalsIgnoreCase("Edit")){
                                 e.edit(in);
                             } else if(input.equalsIgnoreCase("Delete")){
-                                employees.remove(e);
+                                EmployeeManager.employees.remove(e);
                             } else {
                                 if(!input.equalsIgnoreCase("Back")){
                                     System.out.println("Error: invalid input");
@@ -351,15 +75,16 @@ public class Database{
 
                     if (input.equalsIgnoreCase("Display")){
                         System.out.println("Members:");
-                        for(Member m: members){
+                        for(Member m: MemberManager.members){
                             m.display();
                         }
                     } else if(input.equalsIgnoreCase("Input")){
-                        addMember(in);
+                        MemberManager.add(in, id_num);
+                        id_num++;
                     } else if (input.equalsIgnoreCase("Search")){
-                        searchMembers(in);
+                        MemberManager.search(in);
                     } else if (input.equalsIgnoreCase("Select")){
-                        Member m = selectMember(in);
+                        Member m = MemberManager.select(in);
                         if(m != null){
                             System.out.println("Enter 'Edit' to edit\n\t 'Delete' to delete\n\t 'Back' to go back");
                             input = in.nextLine();
@@ -367,7 +92,7 @@ public class Database{
                             if(input.equalsIgnoreCase("Edit")){
                                 m.edit(in);
                             } else if(input.equalsIgnoreCase("Delete")){
-                                members.remove(m);
+                                MemberManager.members.remove(m);
                             } else {
                                 if(!input.equalsIgnoreCase("Back")){
                                     System.out.println("Error: invalid input");
@@ -389,15 +114,15 @@ public class Database{
 
                     if (input.equalsIgnoreCase("Display")){
                         System.out.println("Warehouses:");
-                        for(Warehouse e: warehouses){
+                        for(Warehouse e: WarehouseManager.warehouses){
                             e.display();
                         }
                     } else if(input.equalsIgnoreCase("Input")){
-                        addWarehouse(in);
+                        WarehouseManager.add(in);
                     } else if (input.equalsIgnoreCase("Search")){
-                        searchWarehouses(in);
+                        WarehouseManager.search(in);
                     } else if (input.equalsIgnoreCase("Select")){
-                        Warehouse w = selectWarehouse(in);
+                        Warehouse w = WarehouseManager.select(in);
                         if(w != null){
                             System.out.println("Enter 'Edit' to edit\n\t 'Delete' to delete\n\t 'Back' to go back");
                             input = in.nextLine();
@@ -405,7 +130,7 @@ public class Database{
                             if(input.equalsIgnoreCase("Edit")){
                                 w.edit(in);
                             } else if(input.equalsIgnoreCase("Delete")){
-                                warehouses.remove(w);
+                                WarehouseManager.warehouses.remove(w);
                             } else {
                                 if(!input.equalsIgnoreCase("Back")){
                                     System.out.println("Error: invalid input");
