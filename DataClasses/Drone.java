@@ -8,7 +8,7 @@ public class Drone {
     public String year;
     public String maxSpeed;
     public String volumeCapacity;
-    public String distaceAutonomy;
+    public String distanceAutonomy;
     public String manufacturer;
     public Boolean status;
     public String warrantyExpirationDate;
@@ -16,13 +16,13 @@ public class Drone {
     public String serialNumber;
     public String fleetID;
     
-    public Drone(String _name, String _weightCapacity, String _year, String _maxSpeed, String _volumeCapacity, String _distaceAutonomy, String _manufacturer, Boolean _status, String _warrantyExpirationDate, String _modelNumber, String _serialNumber, String _fleetID){
+    public Drone(String _name, String _weightCapacity, String _year, String _maxSpeed, String _volumeCapacity, String _distanceAutonomy, String _manufacturer, Boolean _status, String _warrantyExpirationDate, String _modelNumber, String _serialNumber, String _fleetID){
         this.name = _name;
         this.weightCapacity = _weightCapacity;
         this.year = _year;
         this.maxSpeed = _maxSpeed;
         this.volumeCapacity = _volumeCapacity;
-        this.distaceAutonomy = _distaceAutonomy;
+        this.distanceAutonomy = _distanceAutonomy;
         this.manufacturer = _manufacturer;
         this.status = _status;
         this.warrantyExpirationDate = _warrantyExpirationDate;
@@ -37,7 +37,7 @@ public class Drone {
         System.out.println("Year: " + this.year);
         System.out.println("Max Speed: " + this.maxSpeed);
         System.out.println("Volume Capacity: " + this.volumeCapacity);
-        System.out.println("Distance Autonomy: " + this.distaceAutonomy);
+        System.out.println("Distance Autonomy: " + this.distanceAutonomy);
         System.out.println("Manufacturer: " + this.manufacturer);
         System.out.println("Status: " + this.status);
         System.out.println("Warranty Expiration Date: " + this.warrantyExpirationDate);
@@ -71,7 +71,7 @@ public class Drone {
                     this.volumeCapacity = data;
                     break;
                 case "distance autonomy":
-                    this.distaceAutonomy = data;
+                    this.distanceAutonomy = data;
                     break;
                 case "manufacturer":
                     this.manufacturer = data;
