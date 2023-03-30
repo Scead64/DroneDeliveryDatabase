@@ -1,20 +1,103 @@
-import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.*;
 import DataClasses.*;
 import ManagerClasses.*;
 
 public class Database{
-    
+
+	//Database file name
+	private static String DATABASE = "DroneDatabase.db";
+	
+	//Number to keep track of id numbers
     public static int id_num = 0;
 
+    /**
+     * Connects to the database if it exists, creates it if it does not, and returns the connection object.
+     * 
+     * @param databaseFileName the database file name
+     * @return a connection object to the designated database
+     */
+    public static Connection initializeDB(String databaseFileName) {
+    	/**
+    	 * The "Connection String" or "Connection URL".
+    	 * 
+    	 * "jdbc:sqlite:" is the "subprotocol".
+    	 * (If this were a SQL Server database it would be "jdbc:sqlserver:".)
+    	 */
+        String url = "jdbc:sqlite:" + databaseFileName;
+        Connection conn = null; // If you create this variable inside the Try block it will be out of scope
+        try {
+            conn = DriverManager.getConnection(url);
+            if (conn != null) {
+            	// Provides some positive assurance the connection and/or creation was successful.
+                DatabaseMetaData meta = conn.getMetaData();
+                System.out.println("The driver name is " + meta.getDriverName());
+                System.out.println("The connection to the database was successful.");
+            } else {
+            	// Provides some feedback in case the connection failed but did not throw an exception.
+            	System.out.println("Null Connection");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("There was a problem connecting to the database.");
+        }
+        return conn;
+    }
+    
+    /**
+     * Queries the database and prints the results.
+     * 
+     * @param conn a connection object
+     * @param sql a SQL statement that returns rows
+     * This query is written with the Statement class, typically 
+     * used for static SQL SELECT statements
+     */
+    public static void sqlQuery(Connection conn, String sql){
+        try {
+        	Statement stmt = conn.createStatement();
+        	ResultSet rs = stmt.executeQuery(sql);
+        	ResultSetMetaData rsmd = rs.getMetaData();
+        	int columnCount = rsmd.getColumnCount();
+        	for (int i = 1; i <= columnCount; i++) {
+        		String value = rsmd.getColumnName(i);
+        		System.out.print(value);
+        		if (i < columnCount) System.out.print(",  ");
+        	}
+			System.out.print("\n");
+        	while (rs.next()) {
+        		for (int i = 1; i <= columnCount; i++) {
+        			String columnValue = rs.getString(i);
+            		System.out.print(columnValue);
+            		if (i < columnCount) System.out.print(",  ");
+        		}
+    			System.out.print("\n");
+        	}
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     public static void main(String[] args) {
-
+    	
+    	Connection conn = initializeDB(DATABASE);
+    	PreparedStatement stmt = null;
+    	ResultSet rSet = null;
         Scanner in = new Scanner(System.in);
-        String input;
+        String input, query;
         System.out.println("Hello, welcome to Drone Delivery Services.");
 
+        
+        
         while(true){
             System.out.println("Databases are:\n\tEmployees\n\tMembers\n\tWarehouses\n\tEquipment\n\tDrones\n\tOrders\n");
-            System.out.println("Please enter a table to display ('Q' to quit)");
+            System.out.print("Please enter a table to display ('Q' to quit): ");
             input = in.nextLine();
 
             //Exit case
