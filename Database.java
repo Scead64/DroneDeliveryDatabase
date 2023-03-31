@@ -89,22 +89,10 @@ public class Database{
     public static void main(String[] args) {
     	
     	Connection conn = initializeDB(DATABASE);
-        String testQuery = "SELECT * FROM Employee";
-        try {
-            PreparedStatement stmt = conn.prepareStatement(testQuery);
-            ResultSet rSet = stmt.executeQuery();
+        
+        PreparedStatement stmt = null;
+        ResultSet rSet = null;
 
-            while(rSet.next()) {
-        		String email = rSet.getString("email");
-        		
-        		System.out.println(email);
-        	}
-
-        }
-        catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    	
     	
         Scanner in = new Scanner(System.in);
         String input, query;
