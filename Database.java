@@ -142,7 +142,6 @@ public class Database {
 
                     } else if (input.equalsIgnoreCase("Input")) {
                         EmployeeManager.add(in, conn, stmt);
-                        id_num++;
 
                     } else if (input.equalsIgnoreCase("Select")){
                         EmployeeManager.select(in, conn, stmt, rSet);
