@@ -19,7 +19,6 @@ import ManagerClasses.EmployeeManager;
 import ManagerClasses.EquipmentManager;
 import ManagerClasses.MemberManager;
 import ManagerClasses.OrderManager;
-import ManagerClasses.UsefulReports;
 import ManagerClasses.WarehouseManager;
 
 public class Database {
@@ -43,7 +42,7 @@ public class Database {
     public static Connection initializeDB(String databaseFileName) {
         /**
          * The "Connection String" or "Connection URL".
-         * 
+         *
          * "jdbc:sqlite:" is the "subprotocol". (If this were a SQL Server
          * database it would be "jdbc:sqlserver:".)
          */
@@ -114,11 +113,10 @@ public class Database {
         Connection conn = initializeDB(DATABASE);
         PreparedStatement stmt = null;
         ResultSet rSet = null;
+
         Scanner in = new Scanner(System.in);
         String input, query;
         System.out.println("Hello, welcome to Drone Delivery Services.");
-
-        UsefulReports.itemsCheckedOut(conn);
 
         while (true) {
 
