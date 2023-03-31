@@ -3,54 +3,162 @@ package ManagerClasses;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
-import DataClasses.*;
 
 public class EmployeeManager {
-    public static ArrayList<Employee> employees = new ArrayList<Employee>();
 
-    // Employee methods
+    /*
+     * Displays all data currently in the table
+     */
+    public static void displayAll(Connection conn, String table) {
+        try {
+            //Query data
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + table);
+            ResultSet rSet = stmt.executeQuery();
+            ResultSetMetaData rsmd = rSet.getMetaData();
+            int columnCount = rsmd.getColumnCount();
 
-    public static void add(Scanner in, Connection conn, PreparedStatement stmt) {
-        System.out.print("email: ");
-        String email = in.nextLine();
-        System.out.print("phone: ");
-        String phone = in.nextLine();
-        System.out.print("address: ");
-        String address = in.nextLine();
-        System.out.print("fname: ");
-        String fname = in.nextLine();
-        System.out.print("lname: ");
-        String lname = in.nextLine();
-        System.out.print("Salary: ");
-        String salary = in.nextLine();
-        System.out.print("password: ");
-        String password = in.nextLine();
-        System.out.print("YOE: ");
-        String YOE = in.nextLine();
-        System.out.print("warehouse_address: ");
-        String warehouseAddr = in.nextLine();
-        System.out.print("user_id: ");
-        String id = in.nextLine();
+            //Print column metadata
+            System.out.println("\nColumns:");
+            for (int i = 1; i <= columnCount; i++) {
+                String value = rsmd.getColumnName(i);
+                System.out.print(value);
+                if (i < columnCount) {
+                    System.out.print(",  ");
+                }
+            }
+
+            System.out.println("\n\nData:");
+            //Print data
+            while (rSet.next()) {
+                for (int i = 1; i <= columnCount; i++) {
+                    String columnValue = rSet.getString(i);
+                    System.out.print(columnValue);
+                    if (i < columnCount) {
+                        System.out.print(",  ");
+                    }
+                }
+                System.out.print("\n");
+            }
+        
+            //Close opened resources
+            rSet.close();
+            stmt.close();
+
+        //Catch any SQL exception and print message
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        System.out.println();
+    }
+
+    /*
+     * Adds a new row to the table
+     */
+    public static void add(Scanner in, Connection conn, String table) {
+        
+        //String variable to keep track of user-inputted values
+        String data, fields = "";
 
         try {
-            stmt = conn.prepareStatement("INSERT INTO EMPLOYEE VALUES (" +
-                    email + ", " +
-                    phone + ", " +
-                    address + ", " +
-                    fname + ", " +
-                    lname + ", " +
-                    salary + ", " +
-                    password + ", " +
-                    YOE + ", " +
-                    warehouseAddr + ", " +
-                    id);
-        } catch (Exception ex) {
+
+            //Get meta data
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM EMPLOYEE");
+            ResultSet rSet = stmt.executeQuery();
+            ResultSetMetaData rsmd = rSet.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+
+            //Get field string
+            for (int i = 1; i <= columnCount; i++) {
+                fields += "?";
+                if (i < columnCount) {
+                    fields += ",";
+                }
+            }
+
+            stmt = conn.prepareStatement("INSERT INTO " + table + " VALUES (" + fields + ")");
+
+            //Get user input
+            System.out.println();
+            for (int i = 1; i <= columnCount; i++) {
+                String value = rsmd.getColumnName(i);
+                System.out.print(value + ": ");
+                data = in.nextLine();
+                stmt.setString(i, data);
+            }
+            stmt.executeUpdate();
+
+            //Close opened resources
+            rSet.close();
+            stmt.close();
+
+        //Catch any SQL exception and print message
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+        }
+        System.out.println();
+
+        // try {
+        //     stmt = conn.prepareStatement("INSERT INTO EMPLOYEE VALUES (" +
+        //             email + ", " +
+        //             phone + ", " +
+        //             address + ", " +
+        //             fname + ", " +
+        //             lname + ", " +
+        //             salary + ", " +
+        //             password + ", " +
+        //             YOE + ", " +
+        //             warehouseAddr + ", " +
+        //             id + ")");
+        // } catch (SQLException ex) {
+        //     System.out.println(ex.getMessage());
+        // }
+    }
+
+    /**
+     * Queries the database and prints the results.
+     *
+     * @param conn
+     *            a connection object
+     * @param sql
+     *            a SQL statement that returns rows This query is written with
+     *            the Statement class, typically used for static SQL SELECT
+     *            statements
+     */
+    public static void sqlQuery(Connection conn, String sql) {
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            for (int i = 1; i <= columnCount; i++) {
+                String value = rsmd.getColumnName(i);
+                System.out.print(value);
+                if (i < columnCount) {
+                    System.out.print(",  ");
+                }
+            }
+            System.out.print("\n");
+            while (rs.next()) {
+                for (int i = 1; i <= columnCount; i++) {
+                    String columnValue = rs.getString(i);
+                    System.out.print(columnValue);
+                    if (i < columnCount) {
+                        System.out.print(",  ");
+                    }
+                }
+                System.out.print("\n");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
+    
     public static void select(Scanner in, Connection conn, PreparedStatement stmt, ResultSet rSet) {
         String input, user_id;
         System.out.print("Enter employee userID: ");
@@ -100,7 +208,7 @@ public class EmployeeManager {
                 }
             }
 
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
@@ -170,34 +278,5 @@ public class EmployeeManager {
     //     }
     // }
 
-    public static void displayAll(Connection conn, PreparedStatement stmt, ResultSet rSet) {
-        try {
-            stmt = conn.prepareStatement("SELECT * FROM EMPLOYEE");
-            rSet = stmt.executeQuery();
-            while (rSet.next()) {
-                String email = rSet.getString("email");
-                String phone = rSet.getString("phone");
-                String address = rSet.getString("address");
-                String fname = rSet.getString("fname");
-                String lname = rSet.getString("lname");
-                String salary = rSet.getString("Salary");
-                String password = rSet.getString("password");
-                String yoe = rSet.getString("YOE");
-                String warehouseAddr = rSet.getString("warehouse_address");
-                String id = rSet.getString("user_id");
-                System.out.println("email: " + email +
-                        " phone: " + phone +
-                        " address: " + address +
-                        " fname: " + fname +
-                        " lname: " + lname +
-                        " Salary: " + salary +
-                        " password: " + password +
-                        " YOE: " + yoe +
-                        " warehouse_address: " + warehouseAddr +
-                        " user_id: " + id);
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
+    
 }

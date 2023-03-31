@@ -69,45 +69,6 @@ public class Database {
         return conn;
     }
 
-    /**
-     * Queries the database and prints the results.
-     *
-     * @param conn
-     *            a connection object
-     * @param sql
-     *            a SQL statement that returns rows This query is written with
-     *            the Statement class, typically used for static SQL SELECT
-     *            statements
-     */
-    public static void sqlQuery(Connection conn, String sql) {
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnCount = rsmd.getColumnCount();
-            for (int i = 1; i <= columnCount; i++) {
-                String value = rsmd.getColumnName(i);
-                System.out.print(value);
-                if (i < columnCount) {
-                    System.out.print(",  ");
-                }
-            }
-            System.out.print("\n");
-            while (rs.next()) {
-                for (int i = 1; i <= columnCount; i++) {
-                    String columnValue = rs.getString(i);
-                    System.out.print(columnValue);
-                    if (i < columnCount) {
-                        System.out.print(",  ");
-                    }
-                }
-                System.out.print("\n");
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     public static void main(String[] args) {
 
         Connection conn = initializeDB(DATABASE);
@@ -121,7 +82,7 @@ public class Database {
         while (true) {
 
             System.out.println(
-                    "Databases:\n\tEmployees\n\tMembers\n\tWarehouses\n\tEquipment\n\tDrones\n\tOrders\n");
+                    "Databases:\n\tEmployee\n\tMember\n\tWarehouse\n\tEquipment\n\tDrone\n\tOrders\n");
             System.out.println(
                     "Useful Reports: \n\tRenting Checkouts\n\tMost Popular Item\n\tMost Popular Manufacturer\n\t"
                             + "Most Popular Drone\n\tItems Checked Out\n\tEquipment By Type\n");
@@ -133,7 +94,7 @@ public class Database {
             if (input.equalsIgnoreCase("Q")) {
                 break;
 
-                //Employee case
+            //Useful reports case
             } else if (input.equalsIgnoreCase("U")) {
                 while (true) {
                     System.out.println("Reports are:"
@@ -182,7 +143,7 @@ public class Database {
                 }
             }
 
-            else if (input.equalsIgnoreCase("Employees")) {
+            else if (input.equalsIgnoreCase("Employee")) {
                 currentClass = "Employee";
                 while (true) {
                     System.out.println(
@@ -190,10 +151,10 @@ public class Database {
                     input = in.nextLine();
 
                     if (input.equalsIgnoreCase("Display")) {
-                        EmployeeManager.displayAll(conn, stmt, rSet);
+                        EmployeeManager.displayAll(conn, currentClass);
 
                     } else if (input.equalsIgnoreCase("Input")) {
-                        EmployeeManager.add(in, conn, stmt);
+                        EmployeeManager.add(in, conn, currentClass);
 
                     } else if (input.equalsIgnoreCase("Select")) {
                         EmployeeManager.select(in, conn, stmt, rSet);
@@ -209,7 +170,7 @@ public class Database {
                     }
                 }
 
-            } else if (input.equalsIgnoreCase("Members")) {
+            } else if (input.equalsIgnoreCase("Member")) {
                 while (true) {
                     System.out.println(
                             "Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
@@ -254,7 +215,7 @@ public class Database {
                     }
                 }
 
-            } else if (input.equalsIgnoreCase("Warehouses")) {
+            } else if (input.equalsIgnoreCase("Warehouse")) {
                 while (true) {
                     System.out.println(
                             "Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
@@ -330,7 +291,7 @@ public class Database {
                         System.out.println("Error: invalid input");
                     }
                 }
-            } else if (input.equalsIgnoreCase("Drones")) {
+            } else if (input.equalsIgnoreCase("Drone")) {
                 while (true) {
                     System.out.println(
                             "Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
@@ -411,6 +372,13 @@ public class Database {
             }
         }
 
+        //Close opened resources and exit
+        try{
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
         in.close();
+        System.out.println("Have a nice day!");
     }
 }
