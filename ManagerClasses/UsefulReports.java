@@ -36,7 +36,7 @@ public class UsefulReports {
 
     public static void popularItem(Connection conn) {
         //Popular item: find the most popular item in the database
-        
+
         // SELECT Equipment.serial_number, COUNT(Equipment_Rental.serial_number) as num_rented
         // FROM Equipment, Equipment_Rental
         // WHERE Equipment.serial_number = Equipment_Rental.serial_number
@@ -44,61 +44,98 @@ public class UsefulReports {
         // ORDER BY num_rented DESC LIMIT 5;
 
         String query = "SELECT Equipment.serial_number, COUNT(Equipment_Rental.serial_number) as num_rented , Equipment.department, Equipment.description FROM Equipment, Equipment_Rental WHERE Equipment.serial_number = Equipment_Rental.serial_number GROUP BY Equipment_Rental.serial_number ORDER BY num_rented DESC LIMIT 1;";
-         try {
+        try {
             PreparedStatement stmt = conn.prepareStatement(query);
             ResultSet rSet = stmt.executeQuery();
-            while(rSet.next()) {
+            while (rSet.next()) {
                 String serial_number = rSet.getString("serial_number");
                 int num_rented = rSet.getInt("num_rented");
                 String department = rSet.getString("department");
                 String description = rSet.getString("description");
                 System.out.println("\n");
-                System.out.println("The most popular item is " + serial_number + " in the " + department + " department. \nDescription: " + description);
-                System.out.println("This item was rented " + num_rented + " times.");
+                System.out.println("The most popular item is " + serial_number
+                        + " in the " + department
+                        + " department. \nDescription: " + description);
+                System.out.println(
+                        "This item was rented " + num_rented + " times.");
                 System.out.println("\n");
             }
 
-         }
-         catch (SQLException e) {
-             System.out.println("Error: " + e.getMessage());
-         }
-        
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
     }
 
     public static void popularManufacturer(Connection conn) {
 
         // Popular Manufacturer: Find the most frequent equipment manufacturer in the database (i.e. the one who has had the most rented units)
 
-
         // SELECT manufacturer, MAX(rented) AS rented
-	    // FROM (SELECT manufacturer, COUNT(Equipment_rental.user_id) AS rented
+        // FROM (SELECT manufacturer, COUNT(Equipment_rental.user_id) AS rented
         // FROM Equipment, Equipment_Info, Equipment_Rental
         // WHERE Equipment.serial_number = Equipment_Rental.serial_number
         // AND Equipment.model_number = Equipment_Info.model_number
         // GROUP BY Equipment_info.manufacturer);
 
         String query = "SELECT manufacturer, MAX(rented) AS rented FROM (SELECT manufacturer, COUNT(Equipment_rental.user_id) AS rented FROM Equipment, Equipment_Info, Equipment_Rental WHERE Equipment.serial_number = Equipment_Rental.serial_number AND Equipment.model_number = Equipment_Info.model_number GROUP BY Equipment_info.manufacturer);";
-         try {
+        try {
             PreparedStatement stmt = conn.prepareStatement(query);
             ResultSet rSet = stmt.executeQuery();
-            while(rSet.next()) {
+            while (rSet.next()) {
                 String manufacturer = rSet.getString("manufacturer");
                 String rented = rSet.getString("rented");
                 System.out.println("\n");
-                System.out.println("The manufacturer with the most rented items is " + manufacturer + ".");
-                System.out.println("An item from this manufacturer was rented " + rented + " times.");
+                System.out.println(
+                        "The manufacturer with the most rented items is "
+                                + manufacturer + ".");
+                System.out.println("An item from this manufacturer was rented "
+                        + rented + " times.");
                 System.out.println("\n");
             }
 
-         }
-         catch (SQLException e) {
-             System.out.println("Error: " + e.getMessage());
-         }
-
-
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
-    public static void popularDrone() {
+    public static void popularDrone(Connection conn) {
+        /*
+         * Find the most used drone in the database (use the flying distance of
+         * the drone -member distance- and number of deliveries the drone has
+         * been traveled to calculate) (see similar query from Checkpoint #4)
+         */
+
+        String query = "SELECT Equipment_Delivery.drone_serial_num, COUNT(Equipment_Delivery.equipment_serial_number) AS num_delivered\r\n"
+                + "FROM Equipment_Delivery\r\n"
+                + "GROUP BY Equipment_Delivery.drone_serial_num\r\n"
+                + "ORDER BY num_delivered DESC\r\n" + "Limit 1;";
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            ResultSet rs = stmnt.executeQuery();
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            for (int i = 1; i <= columnCount; i++) {
+                String value = rsmd.getColumnName(i);
+                System.out.print(value);
+                if (i < columnCount) {
+                    System.out.print(",  ");
+                }
+            }
+            System.out.print("\n");
+            while (rs.next()) {
+                for (int i = 1; i <= columnCount; i++) {
+                    String columnValue = rs.getString(i);
+                    System.out.print(columnValue);
+                    if (i < columnCount) {
+                        System.out.print(",  ");
+                    }
+                }
+                System.out.print("\n");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 
@@ -146,11 +183,11 @@ public class UsefulReports {
                 + "AND year < ?;";
         try {
             PreparedStatement stmnt = conn.prepareStatement(query);
+            stmnt.setString(1, type);
+            stmnt.setString(2, year);
             ResultSet rs = stmnt.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
             int columnCount = rsmd.getColumnCount();
-            stmnt.setString(1, type);
-            stmnt.setString(1, year);
             for (int i = 1; i <= columnCount; i++) {
                 String value = rsmd.getColumnName(i);
                 System.out.print(value);

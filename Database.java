@@ -118,7 +118,7 @@ public class Database {
         Scanner in = new Scanner(System.in);
         String input, query;
         System.out.println("Hello, welcome to Drone Delivery Services.");
-        UsefulReports.equipmentByType(conn, "monkey wrench", "2023");
+        UsefulReports.popularDrone(conn);
         while (true) {
 
             System.out.println(
