@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 import DataClasses.Drone;
-import DataClasses.Employee;
 import DataClasses.Equipment;
 import DataClasses.Member;
 import DataClasses.Order;
@@ -19,7 +18,6 @@ import ManagerClasses.EmployeeManager;
 import ManagerClasses.EquipmentManager;
 import ManagerClasses.MemberManager;
 import ManagerClasses.OrderManager;
-import ManagerClasses.UsefulReports;
 import ManagerClasses.WarehouseManager;
 
 public class Database {
@@ -118,7 +116,7 @@ public class Database {
         Scanner in = new Scanner(System.in);
         String input, query;
         System.out.println("Hello, welcome to Drone Delivery Services.");
-        UsefulReports.popularDrone(conn);
+
         while (true) {
 
             System.out.println(
@@ -130,12 +128,12 @@ public class Database {
             if (input.equalsIgnoreCase("Q")) {
                 break;
 
-
-            //Employee case
-            } else if(input.equalsIgnoreCase("Employees")){
-            	currentClass = "Employee";
-                while(true){
-                    System.out.println("Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Select' to edit or delete existing data\n\t'Search' to search data\n\t'Back' to go back");
+                //Employee case
+            } else if (input.equalsIgnoreCase("Employees")) {
+                currentClass = "Employee";
+                while (true) {
+                    System.out.println(
+                            "Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Select' to edit or delete existing data\n\t'Search' to search data\n\t'Back' to go back");
                     input = in.nextLine();
 
                     if (input.equalsIgnoreCase("Display")) {
@@ -144,10 +142,10 @@ public class Database {
                     } else if (input.equalsIgnoreCase("Input")) {
                         EmployeeManager.add(in, conn, stmt);
 
-                    } else if (input.equalsIgnoreCase("Select")){
+                    } else if (input.equalsIgnoreCase("Select")) {
                         EmployeeManager.select(in, conn, stmt, rSet);
-                        
-                    } else if (input.equalsIgnoreCase("Search")){
+
+                    } else if (input.equalsIgnoreCase("Search")) {
                         // EmployeeManager.search(in, conn, stmt, rSet);
 
                     } else if (input.equalsIgnoreCase("Back")) {
@@ -158,10 +156,10 @@ public class Database {
                     }
                 }
 
-                
-            } else if(input.equalsIgnoreCase("Members")){
-                while(true){
-                    System.out.println("Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
+            } else if (input.equalsIgnoreCase("Members")) {
+                while (true) {
+                    System.out.println(
+                            "Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
                     input = in.nextLine();
 
                     if (input.equalsIgnoreCase("Display")) {
