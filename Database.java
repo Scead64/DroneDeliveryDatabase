@@ -19,6 +19,7 @@ import ManagerClasses.EmployeeManager;
 import ManagerClasses.EquipmentManager;
 import ManagerClasses.MemberManager;
 import ManagerClasses.OrderManager;
+import ManagerClasses.UsefulReports;
 import ManagerClasses.WarehouseManager;
 
 public class Database {
@@ -117,7 +118,7 @@ public class Database {
         Scanner in = new Scanner(System.in);
         String input, query;
         System.out.println("Hello, welcome to Drone Delivery Services.");
-
+        UsefulReports.equipmentByType(conn, "monkey wrench", "2023");
         while (true) {
 
             System.out.println(
