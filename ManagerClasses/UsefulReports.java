@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class UsefulReports {
 
@@ -146,29 +149,27 @@ public class UsefulReports {
                 + "AND year < ?;";
         try {
             PreparedStatement stmnt = conn.prepareStatement(query);
-            ResultSet rs = stmnt.executeQuery();
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int columnCount = rsmd.getColumnCount();
+            
             stmnt.setString(1, type);
-            stmnt.setString(1, year);
-            for (int i = 1; i <= columnCount; i++) {
-                String value = rsmd.getColumnName(i);
-                System.out.print(value);
-                if (i < columnCount) {
-                    System.out.print(",  ");
-                }
+
+            System.out.println(year);
+            LocalDateTime datetimeParam = LocalDateTime.parse(year + "-01-01T00:00:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME); // Query parameter
+            System.out.println(datetimeParam.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            stmnt.setString(2, datetimeParam.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+
+            ResultSet rs = stmnt.executeQuery();
+
+            System.out.println("\n");
+            System.out.println("Type: " + type);
+            while(rs.next()) {
+                System.out.println("Description: " + rs.getString("description"));
+                System.out.println("\n");
             }
-            System.out.print("\n");
-            while (rs.next()) {
-                for (int i = 1; i <= columnCount; i++) {
-                    String columnValue = rs.getString(i);
-                    System.out.print(columnValue);
-                    if (i < columnCount) {
-                        System.out.print(",  ");
-                    }
-                }
-                System.out.print("\n");
-            }
+            
+            
+
+
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
