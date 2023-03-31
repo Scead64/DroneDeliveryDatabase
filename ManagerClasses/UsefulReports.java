@@ -65,7 +65,36 @@ public class UsefulReports {
         
     }
 
-    public static void popularManufacturer() {
+    public static void popularManufacturer(Connection conn) {
+
+        // Popular Manufacturer: Find the most frequent equipment manufacturer in the database (i.e. the one who has had the most rented units)
+
+
+        // SELECT manufacturer, MAX(rented) AS rented
+	    // FROM (SELECT manufacturer, COUNT(Equipment_rental.user_id) AS rented
+        // FROM Equipment, Equipment_Info, Equipment_Rental
+        // WHERE Equipment.serial_number = Equipment_Rental.serial_number
+        // AND Equipment.model_number = Equipment_Info.model_number
+        // GROUP BY Equipment_info.manufacturer);
+
+        String query = "SELECT manufacturer, MAX(rented) AS rented FROM (SELECT manufacturer, COUNT(Equipment_rental.user_id) AS rented FROM Equipment, Equipment_Info, Equipment_Rental WHERE Equipment.serial_number = Equipment_Rental.serial_number AND Equipment.model_number = Equipment_Info.model_number GROUP BY Equipment_info.manufacturer);";
+         try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rSet = stmt.executeQuery();
+            while(rSet.next()) {
+                String manufacturer = rSet.getString("manufacturer");
+                String rented = rSet.getString("rented");
+                System.out.println("\n");
+                System.out.println("The manufacturer with the most rented items is " + manufacturer + ".");
+                System.out.println("An item from this manufacturer was rented " + rented + " times.");
+                System.out.println("\n");
+            }
+
+         }
+         catch (SQLException e) {
+             System.out.println("Error: " + e.getMessage());
+         }
+
 
     }
 

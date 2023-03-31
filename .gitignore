@@ -1,2 +1,2 @@
-/Database.class
-/ManagerClasses\*.class
+/*.class
+/ManagerClasses/*.class
