@@ -122,9 +122,11 @@ public class Database {
 
             System.out.println(
                     "Databases:\n\tEmployees\n\tMembers\n\tWarehouses\n\tEquipment\n\tDrones\n\tOrders\n");
-            System.out.println("Useful Reports: \n\tRenting Checkouts\n\tMost Popular Item\n\tMost Popular Manufacturer\n\t"
-            +"Most Popular Drone\n\tItems Checked Out\n\tEquipment By Type\n");
-            System.out.print("Please enter a table to display or press 'U' to view some useful reports ('Q' to quit): ");
+            System.out.println(
+                    "Useful Reports: \n\tRenting Checkouts\n\tMost Popular Item\n\tMost Popular Manufacturer\n\t"
+                            + "Most Popular Drone\n\tItems Checked Out\n\tEquipment By Type\n");
+            System.out.print(
+                    "Please enter a table to display or press 'U' to view some useful reports ('Q' to quit): ");
             input = in.nextLine();
 
             //Exit case
@@ -139,7 +141,7 @@ public class Database {
                             + "\n\t2: Most popular item in database."
                             + "\n\t3: Most frequent equipment manufacturer."
                             + "\n\t4: Most used drone."
-                            + "\n\t5:Member who has rented the most items and the number of items rented."
+                            + "\n\t5: Member who has rented the most items and the number of items rented."
                             + "\n\t6: Equipment of a certain type released before a certain year."
                             + "\n\tQ: Back\n");
                     input = in.next();
