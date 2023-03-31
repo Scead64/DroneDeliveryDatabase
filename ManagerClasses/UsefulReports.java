@@ -34,8 +34,35 @@ public class UsefulReports {
 
     }
 
-    public static void popularItem() {
+    public static void popularItem(Connection conn) {
+        //Popular item: find the most popular item in the database
+        
+        // SELECT Equipment.serial_number, COUNT(Equipment_Rental.serial_number) as num_rented
+        // FROM Equipment, Equipment_Rental
+        // WHERE Equipment.serial_number = Equipment_Rental.serial_number
+        // GROUP BY Equipment_Rental.serial_number
+        // ORDER BY num_rented DESC LIMIT 5;
 
+        String query = "SELECT Equipment.serial_number, COUNT(Equipment_Rental.serial_number) as num_rented , Equipment.department, Equipment.description FROM Equipment, Equipment_Rental WHERE Equipment.serial_number = Equipment_Rental.serial_number GROUP BY Equipment_Rental.serial_number ORDER BY num_rented DESC LIMIT 1;";
+         try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rSet = stmt.executeQuery();
+            while(rSet.next()) {
+                String serial_number = rSet.getString("serial_number");
+                int num_rented = rSet.getInt("num_rented");
+                String department = rSet.getString("department");
+                String description = rSet.getString("description");
+                System.out.println("\n");
+                System.out.println("The most popular item is " + serial_number + " in the " + department + " department. \nDescription: " + description);
+                System.out.println("This item was rented " + num_rented + " times.");
+                System.out.println("\n");
+            }
+
+         }
+         catch (SQLException e) {
+             System.out.println("Error: " + e.getMessage());
+         }
+        
     }
 
     public static void popularManufacturer() {
