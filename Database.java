@@ -111,63 +111,37 @@ public class Database{
                     System.out.println("Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
                     input = in.nextLine();
 
+                    // Case for displaying all employees
                     if (input.equalsIgnoreCase("Display")){
-                    	try {
-            				stmt = conn.prepareStatement("SELECT * FROM EMPLOYEE");
-            				rSet = stmt.executeQuery();
-            				while(rSet.next()) {
-            					String email = rSet.getString("email");
-            					String phone = rSet.getString("phone");
-            					String address = rSet.getString("address");
-            					String fname = rSet.getString("fname");
-            					String lname = rSet.getString("lname");
-            					String salary = rSet.getString("Salary");
-            					String password = rSet.getString("password");
-            					String yoe = rSet.getString("YOE");
-            					String warehouseAddr = rSet.getString("warehouse_address");
-            					String id = rSet.getString("user_id");
-            					System.out.println("email: " + email + 
-            										" phone: " + phone +
-            										" address: " + address +
-            										" fname: " + fname +
-            										" lname: " + lname +
-            										" Salary: " + salary +
-            										" password: " + password +
-            										" YOE: " + yoe +
-            										" warehouse_address: " + warehouseAddr +
-            										" user_id: " + id);	
-            				}
-            			} catch (Exception ex) {
-            				System.out.println(ex.getMessage());
-            			}
+                    	EmployeeManager.displayAll(conn, stmt, rSet);
 
+                    // Case for inputting a new Employee
                     } else if(input.equalsIgnoreCase("Input")){
-                        EmployeeManager.add(in, id_num);
-                        id_num++;
+                        EmployeeManager.add(in, conn, stmt);
 
                     } else if (input.equalsIgnoreCase("Search")){
-                        EmployeeManager.search(in);
+                        // EmployeeManager.search(in, conn, stmt, rSet);
 
                     } else if (input.equalsIgnoreCase("Select")){
-                        Employee e = EmployeeManager.select(in);
+                        EmployeeManager.select(in, conn, stmt, rSet);
                         
-                        if(e != null){
-                            System.out.println("Enter 'Edit' to edit employee\n\t 'Delete' to delete employee\n\t 'Back' to go back");
-                            input = in.nextLine();
+                        // if(e != null){
+                        //     System.out.println("Enter 'Edit' to edit employee\n\t 'Delete' to delete employee\n\t 'Back' to go back");
+                        //     input = in.nextLine();
 
-                            if(input.equalsIgnoreCase("Edit")){
-                                e.edit(in);
+                        //     if(input.equalsIgnoreCase("Edit")){
+                        //         e.edit(in);
                         
-                            } else if(input.equalsIgnoreCase("Delete")){
-                                EmployeeManager.employees.remove(e);
+                        //     } else if(input.equalsIgnoreCase("Delete")){
+                        //         EmployeeManager.employees.remove(e);
                         
-                            } else {
+                        //     } else {
                         
-                                if(!input.equalsIgnoreCase("Back")){
-                                    System.out.println("Error: invalid input");
-                                }
-                            }
-                        }
+                        //         if(!input.equalsIgnoreCase("Back")){
+                        //             System.out.println("Error: invalid input");
+                        //         }
+                        //     }
+                        // }
 
                     } else if (input.equalsIgnoreCase("Back")){
                         break;
