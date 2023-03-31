@@ -110,11 +110,9 @@ public class Database {
 
     public static void main(String[] args) {
 
-
         Connection conn = initializeDB(DATABASE);
         PreparedStatement stmt = null;
         ResultSet rSet = null;
-
 
         Scanner in = new Scanner(System.in);
         String input, query;
@@ -138,7 +136,6 @@ public class Database {
                             "Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
                     input = in.nextLine();
 
-<<<<<<< HEAD
                     if (input.equalsIgnoreCase("Display")) {
                         try {
                             stmt = conn
@@ -170,14 +167,15 @@ public class Database {
                         }
 
                     } else if (input.equalsIgnoreCase("Input")) {
-                        EmployeeManager.add(in, id_num);
+                        EmployeeManager.add(in, conn, stmt);
                         id_num++;
 
                     } else if (input.equalsIgnoreCase("Search")) {
                         EmployeeManager.search(in);
 
                     } else if (input.equalsIgnoreCase("Select")) {
-                        Employee e = EmployeeManager.select(in);
+                        Employee e = EmployeeManager.select(in, conn, stmt,
+                                rSet);
 
                         if (e != null) {
                             System.out.println(
@@ -197,39 +195,6 @@ public class Database {
                                 }
                             }
                         }
-=======
-                    // Case for displaying all employees
-                    if (input.equalsIgnoreCase("Display")){
-                    	EmployeeManager.displayAll(conn, stmt, rSet);
-
-                    // Case for inputting a new Employee
-                    } else if(input.equalsIgnoreCase("Input")){
-                        EmployeeManager.add(in, conn, stmt);
-
-                    } else if (input.equalsIgnoreCase("Search")){
-                        // EmployeeManager.search(in, conn, stmt, rSet);
-
-                    } else if (input.equalsIgnoreCase("Select")){
-                        EmployeeManager.select(in, conn, stmt, rSet);
-
-                        // if(e != null){
-                        //     System.out.println("Enter 'Edit' to edit employee\n\t 'Delete' to delete employee\n\t 'Back' to go back");
-                        //     input = in.nextLine();
-
-                        //     if(input.equalsIgnoreCase("Edit")){
-                        //         e.edit(in);
-
-                        //     } else if(input.equalsIgnoreCase("Delete")){
-                        //         EmployeeManager.employees.remove(e);
-
-                        //     } else {
-
-                        //         if(!input.equalsIgnoreCase("Back")){
-                        //             System.out.println("Error: invalid input");
-                        //         }
-                        //     }
-                        // }
->>>>>>> 140a3765a250f2ee7b328163c84e026d158e27f2
 
                     } else if (input.equalsIgnoreCase("Back")) {
                         break;
