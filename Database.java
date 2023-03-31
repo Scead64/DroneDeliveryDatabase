@@ -105,10 +105,12 @@ public class Database{
             if(input.equalsIgnoreCase("Q")){
                 break;
 
+
+            //Employee case
             } else if(input.equalsIgnoreCase("Employees")){
             	currentClass = "Employee";
                 while(true){
-                    System.out.println("Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
+                    System.out.println("Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Select' to edit or delete existing data\n\t'Search' to search data\n\t'Back' to go back");
                     input = in.nextLine();
 
                     // Case for displaying all employees
@@ -119,29 +121,11 @@ public class Database{
                     } else if(input.equalsIgnoreCase("Input")){
                         EmployeeManager.add(in, conn, stmt);
 
-                    } else if (input.equalsIgnoreCase("Search")){
-                        // EmployeeManager.search(in, conn, stmt, rSet);
-
                     } else if (input.equalsIgnoreCase("Select")){
                         EmployeeManager.select(in, conn, stmt, rSet);
                         
-                        // if(e != null){
-                        //     System.out.println("Enter 'Edit' to edit employee\n\t 'Delete' to delete employee\n\t 'Back' to go back");
-                        //     input = in.nextLine();
-
-                        //     if(input.equalsIgnoreCase("Edit")){
-                        //         e.edit(in);
-                        
-                        //     } else if(input.equalsIgnoreCase("Delete")){
-                        //         EmployeeManager.employees.remove(e);
-                        
-                        //     } else {
-                        
-                        //         if(!input.equalsIgnoreCase("Back")){
-                        //             System.out.println("Error: invalid input");
-                        //         }
-                        //     }
-                        // }
+                    } else if (input.equalsIgnoreCase("Search")){
+                        // EmployeeManager.search(in, conn, stmt, rSet);
 
                     } else if (input.equalsIgnoreCase("Back")){
                         break;
@@ -152,52 +136,6 @@ public class Database{
                 }
 
                 
-            //Display tables case
-//            } else if(input.equalsIgnoreCase("Employees")){
-//            	currentClass = "Employee";
-//                while(true){
-//                    System.out.println("Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
-//                    input = in.nextLine();
-//
-//                    if (input.equalsIgnoreCase("Display")){
-//                        EmployeeManager.displayAll();
-//
-//                    } else if(input.equalsIgnoreCase("Input")){
-//                        EmployeeManager.add(in, id_num);
-//                        id_num++;
-//
-//                    } else if (input.equalsIgnoreCase("Search")){
-//                        EmployeeManager.search(in);
-//
-//                    } else if (input.equalsIgnoreCase("Select")){
-//                        Employee e = EmployeeManager.select(in);
-//                        
-//                        if(e != null){
-//                            System.out.println("Enter 'Edit' to edit employee\n\t 'Delete' to delete employee\n\t 'Back' to go back");
-//                            input = in.nextLine();
-//
-//                            if(input.equalsIgnoreCase("Edit")){
-//                                e.edit(in);
-//                        
-//                            } else if(input.equalsIgnoreCase("Delete")){
-//                                EmployeeManager.employees.remove(e);
-//                        
-//                            } else {
-//                        
-//                                if(!input.equalsIgnoreCase("Back")){
-//                                    System.out.println("Error: invalid input");
-//                                }
-//                            }
-//                        }
-//
-//                    } else if (input.equalsIgnoreCase("Back")){
-//                        break;
-//                    
-//                    } else {
-//                        System.out.println("Error: invalid input");
-//                    }
-//                }
-
             } else if(input.equalsIgnoreCase("Members")){
                 while(true){
                     System.out.println("Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
