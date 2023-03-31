@@ -202,11 +202,6 @@ public class UsefulReports {
                 System.out.println("Description: " + rs.getString("description"));
                 System.out.println("\n");
             }
-            
-            
-
-
-            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -120,8 +120,10 @@ public class Database {
         while (true) {
 
             System.out.println(
-                    "Databases are:\n\tEmployees\n\tMembers\n\tWarehouses\n\tEquipment\n\tDrones\n\tOrders\n");
-            System.out.print("Please enter a table to display ('Q' to quit): ");
+                    "Databases:\n\tEmployees\n\tMembers\n\tWarehouses\n\tEquipment\n\tDrones\n\tOrders\n");
+            System.out.println("Useful Reports: \n\tRenting Checkouts\n\tMost Popular Item\n\tMost Popular Manufacturer\n\t"
+            +"Most Popular Drone\n\tItems Checked Out\n\tEquipment By Type\n");
+            System.out.print("Please enter a table to display or press 'U' to view some useful reports ('Q' to quit): ");
             input = in.nextLine();
 
             //Exit case
