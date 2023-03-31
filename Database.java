@@ -19,6 +19,7 @@ import ManagerClasses.EmployeeManager;
 import ManagerClasses.EquipmentManager;
 import ManagerClasses.MemberManager;
 import ManagerClasses.OrderManager;
+import ManagerClasses.UsefulReports;
 import ManagerClasses.WarehouseManager;
 
 public class Database {
