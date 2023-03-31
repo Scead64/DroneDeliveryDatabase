@@ -89,23 +89,8 @@ public class Database{
     public static void main(String[] args) {
     	
     	Connection conn = initializeDB(DATABASE);
-        String testQuery = "SELECT * FROM Employee";
-        try {
-            PreparedStatement stmt = conn.prepareStatement(testQuery);
-            ResultSet rSet = stmt.executeQuery();
-
-            while(rSet.next()) {
-        		String email = rSet.getString("email");
-        		
-        		System.out.println(email);
-        	}
-
-        }
-        catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    	
-    	
+        PreparedStatement stmt = null;
+        ResultSet rSet = null;
         Scanner in = new Scanner(System.in);
         String input, query;
         System.out.println("Hello, welcome to Drone Delivery Services.");
