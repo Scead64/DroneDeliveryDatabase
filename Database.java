@@ -18,6 +18,7 @@ import ManagerClasses.EmployeeManager;
 import ManagerClasses.EquipmentManager;
 import ManagerClasses.MemberManager;
 import ManagerClasses.OrderManager;
+import ManagerClasses.UsefulReports;
 import ManagerClasses.WarehouseManager;
 
 public class Database {
@@ -129,7 +130,55 @@ public class Database {
                 break;
 
                 //Employee case
-            } else if (input.equalsIgnoreCase("Employees")) {
+            } else if (input.equalsIgnoreCase("U")) {
+                while (true) {
+                    System.out.println("Reports are:"
+                            + "\n\t1: Number of items rented by one member."
+                            + "\n\t2: Most popular item in database."
+                            + "\n\t3: Most frequent equipment manufacturer."
+                            + "\n\t4: Most used drone."
+                            + "\n\t5:Member who has rented the most items and the number of items rented."
+                            + "\n\t6: Equipment of a certain type released before a certain year."
+                            + "\n\tQ: Back\n");
+                    input = in.next();
+
+                    if (input.equalsIgnoreCase("1")) {
+                        System.out.print(
+                                "Give user id to find number of items for (21-40): ");
+                        int userId = in.nextInt();
+                        UsefulReports.rentingCheckouts(conn, userId);
+                    } else if (input.equalsIgnoreCase("2")) {
+                        UsefulReports.popularItem(conn);
+
+                    } else if (input.equalsIgnoreCase("3")) {
+                        UsefulReports.popularManufacturer(conn);
+
+                    } else if (input.equalsIgnoreCase("4")) {
+                        UsefulReports.popularDrone(conn);
+
+                    } else if (input.equalsIgnoreCase("5")) {
+                        UsefulReports.itemsCheckedOut(conn);
+
+                    } else if (input.equalsIgnoreCase("6")) {
+                        System.out.print(
+                                "Write the type of item to search for: ");
+                        in.nextLine();
+                        String type = in.nextLine();
+                        System.out.print(
+                                "Write the desired year in yyyy format: ");
+
+                        String year = in.nextLine();
+                        UsefulReports.equipmentByType(conn, type, year);
+
+                    } else if (input.equalsIgnoreCase("Q")) {
+                        break;
+                    } else {
+                        System.out.println("Error: invalid input");
+                    }
+                }
+            }
+
+            else if (input.equalsIgnoreCase("Employees")) {
                 currentClass = "Employee";
                 while (true) {
                     System.out.println(

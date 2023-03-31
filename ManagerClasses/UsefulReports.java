@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
 public class UsefulReports {
 
     public static void rentingCheckouts(Connection conn, int user) {
@@ -186,27 +185,24 @@ public class UsefulReports {
                 + "AND year < ?;";
         try {
             PreparedStatement stmnt = conn.prepareStatement(query);
-            
+
             stmnt.setString(1, type);
 
-            System.out.println(year);
-            LocalDateTime datetimeParam = LocalDateTime.parse(year + "-01-01T00:00:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME); // Query parameter
-            System.out.println(datetimeParam.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            stmnt.setString(2, datetimeParam.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-
+            LocalDateTime datetimeParam = LocalDateTime.parse(
+                    year + "-01-01T00:00:00",
+                    DateTimeFormatter.ISO_LOCAL_DATE_TIME); // Query parameter
+            stmnt.setString(2, datetimeParam.format(
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
             ResultSet rs = stmnt.executeQuery();
 
             System.out.println("\n");
             System.out.println("Type: " + type);
-            while(rs.next()) {
-                System.out.println("Description: " + rs.getString("description"));
+            while (rs.next()) {
+                System.out
+                        .println("Description: " + rs.getString("description"));
                 System.out.println("\n");
             }
-            
-            
 
-
-            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
