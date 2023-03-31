@@ -9,29 +9,29 @@ import java.sql.SQLException;
 public class UsefulReports {
 
     public static void rentingCheckouts(Connection conn, int user) {
-    	// Renting checkouts: Find the total number of equipment items rented by a single member patron (user designates the member) (see query from Checkpoint #3)
-        
-        // SELECT user_id, COUNT(serial_number) AS total_items_rented
-        // FROM Equipment_Rental
-        // WHERE user_id = ?;  
-         
+        // Renting checkouts: Find the total number of equipment items rented by a single member patron (user designates the member) (see query from Checkpoint #3)
+        /*
+         * SELECT user_id, COUNT(serial_number) AS total_items_rented FROM
+         * Equipment_Rental WHERE user_id = ?;
+         */
 
-         String query = "SELECT user_id, COUNT(serial_number) AS total_items_rented FROM Equipment_Rental WHERE user_id = ?;";
-         try {
+        String query = "SELECT user_id, COUNT(serial_number) AS total_items_rented FROM Equipment_Rental WHERE user_id = ?;";
+        try {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1,user);
+            stmt.setInt(1, user);
             ResultSet rSet = stmt.executeQuery();
-            while(rSet.next()) {
+            while (rSet.next()) {
                 int user_id = rSet.getInt("user_id");
                 int total_items_rented = rSet.getInt("total_items_rented");
-                System.out.println("User ID: " + user_id + " Total Items Rented: " + total_items_rented);
+                System.out.println("User ID: " + user_id
+                        + " Total Items Rented: " + total_items_rented);
 
             }
 
-         }
-         catch (SQLException e) {
-             System.out.println("Error: " + e.getMessage());
-         }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
     }
 
     public static void popularItem(Connection conn) {
@@ -137,8 +137,41 @@ public class UsefulReports {
         }
     }
 
-    public static void equipmentByType() {
-
+    public static void equipmentByType(Connection conn, String type,
+            String year) {
+        String query = "SELECT description\r\n"
+                + "FROM Equipment, Equipment_Info\r\n"
+                + "WHERE Equipment_Info.type = ?\r\n"
+                + "    AND Equipment.model_number = Equipment_Info.model_number\r\n"
+                + "AND year < ?;";
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(query);
+            ResultSet rs = stmnt.executeQuery();
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            stmnt.setString(1, type);
+            stmnt.setString(1, year);
+            for (int i = 1; i <= columnCount; i++) {
+                String value = rsmd.getColumnName(i);
+                System.out.print(value);
+                if (i < columnCount) {
+                    System.out.print(",  ");
+                }
+            }
+            System.out.print("\n");
+            while (rs.next()) {
+                for (int i = 1; i <= columnCount; i++) {
+                    String columnValue = rs.getString(i);
+                    System.out.print(columnValue);
+                    if (i < columnCount) {
+                        System.out.print(",  ");
+                    }
+                }
+                System.out.print("\n");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
