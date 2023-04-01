@@ -5,21 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Scanner;
 
-import DataClasses.Drone;
-import DataClasses.Equipment;
-import DataClasses.Member;
-import DataClasses.Order;
-import DataClasses.Warehouse;
-import ManagerClasses.DroneManager;
-import ManagerClasses.EmployeeManager;
-import ManagerClasses.EquipmentManager;
-import ManagerClasses.MemberManager;
-import ManagerClasses.OrderManager;
 import ManagerClasses.UsefulReports;
-import ManagerClasses.WarehouseManager;
 
 public class Database {
 
@@ -71,18 +59,27 @@ public class Database {
 
     public static void main(String[] args) {
 
+        // SQL connection variables
         Connection conn = initializeDB(DATABASE);
         PreparedStatement stmt = null;
         ResultSet rSet = null;
+        ResultSetMetaData rsmd = null;
+        int columnCount;
 
+        // I/O variables
         Scanner in = new Scanner(System.in);
         String input, query;
+        
+
         System.out.println("Hello, welcome to Drone Delivery Services.");
-
         while (true) {
-
-            System.out.println(
-                    "Databases:\n\tEmployee\n\tMember\n\tWarehouse\n\tEquipment\n\tDrone\n\tOrders\n");
+            System.out.println("Databases are:"
+                    + "\n\tEmployee"
+                    + "\n\tMember"
+                    + "\n\tWarehouse"
+                    + "\n\tEquipment"
+                    + "\n\tDrone"
+                    + "\n\tOrders\n");
             System.out.println(
                     "Useful Reports: \n\tRenting Checkouts\n\tMost Popular Item\n\tMost Popular Manufacturer\n\t"
                             + "Most Popular Drone\n\tItems Checked Out\n\tEquipment By Type\n");
@@ -141,235 +138,72 @@ public class Database {
                         System.out.println("Error: invalid input");
                     }
                 }
-            }
-
-            else if (input.equalsIgnoreCase("Employee")) {
-                currentClass = "Employee";
-                while (true) {
-                    System.out.println(
-                            "Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Select' to edit or delete existing data\n\t'Search' to search data\n\t'Back' to go back");
-                    input = in.nextLine();
-
-                    if (input.equalsIgnoreCase("Display")) {
-                        EmployeeManager.displayAll(conn, currentClass);
-
-                    } else if (input.equalsIgnoreCase("Input")) {
-                        EmployeeManager.add(in, conn, currentClass);
-
-                    } else if (input.equalsIgnoreCase("Select")) {
-                        EmployeeManager.select(in, conn, stmt, rSet);
-
-                    } else if (input.equalsIgnoreCase("Search")) {
-                        // EmployeeManager.search(in, conn, stmt, rSet);
-
-                    } else if (input.equalsIgnoreCase("Back")) {
-                        break;
-
-                    } else {
-                        System.out.println("Error: invalid input");
-                    }
-                }
-
-            } else if (input.equalsIgnoreCase("Member")) {
-                while (true) {
-                    System.out.println(
-                            "Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
-                    input = in.nextLine();
-
-                    if (input.equalsIgnoreCase("Display")) {
-                        MemberManager.displayAll();
-
-                    } else if (input.equalsIgnoreCase("Input")) {
-                        MemberManager.add(in, id_num);
-                        id_num++;
-
-                    } else if (input.equalsIgnoreCase("Search")) {
-                        MemberManager.search(in);
-
-                    } else if (input.equalsIgnoreCase("Select")) {
-                        Member m = MemberManager.select(in);
-
-                        if (m != null) {
-                            System.out.println(
-                                    "Enter 'Edit' to edit\n\t 'Delete' to delete\n\t 'Reviews' to look at reviews \n\t 'Back' to go back");
-                            input = in.nextLine();
-
-                            if (input.equalsIgnoreCase("Edit")) {
-                                m.edit(in);
-
-                            } else if (input.equalsIgnoreCase("Delete")) {
-                                MemberManager.members.remove(m);
-
-                            } else {
-                                if (!input.equalsIgnoreCase("Back")) {
-                                    System.out.println("Error: invalid input");
-                                }
-
-                            }
-                        }
-
-                    } else if (input.equalsIgnoreCase("Back")) {
-                        break;
-                    } else {
-                        System.out.println("Error: invalid input");
-                    }
-                }
-
-            } else if (input.equalsIgnoreCase("Warehouse")) {
-                while (true) {
-                    System.out.println(
-                            "Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
-                    input = in.nextLine();
-
-                    if (input.equalsIgnoreCase("Display")) {
-                        WarehouseManager.displayAll();
-                    } else if (input.equalsIgnoreCase("Input")) {
-                        WarehouseManager.add(in);
-                    } else if (input.equalsIgnoreCase("Search")) {
-                        WarehouseManager.search(in);
-                    } else if (input.equalsIgnoreCase("Select")) {
-                        Warehouse w = WarehouseManager.select(in);
-                        if (w != null) {
-                            System.out.println(
-                                    "Enter 'Edit' to edit\n\t 'Delete' to delete\n\t 'Back' to go back");
-                            input = in.nextLine();
-
-                            if (input.equalsIgnoreCase("Edit")) {
-                                w.edit(in);
-                            } else if (input.equalsIgnoreCase("Delete")) {
-                                WarehouseManager.warehouses.remove(w);
-                            } else {
-                                if (!input.equalsIgnoreCase("Back")) {
-                                    System.out.println("Error: invalid input");
-                                }
-                            }
-                        }
-
-                    } else if (input.equalsIgnoreCase("Back")) {
-                        break;
-
-                    } else {
-                        System.out.println("Error: invalid input");
-                    }
-                }
-
-            } else if (input.equalsIgnoreCase("Equipment")) {
-                while (true) {
-                    System.out.println(
-                            "Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
-                    input = in.nextLine();
-
-                    if (input.equalsIgnoreCase("Display")) {
-                        EquipmentManager.displayAll();
-
-                    } else if (input.equalsIgnoreCase("Input")) {
-                        EquipmentManager.add(in);
-                    } else if (input.equalsIgnoreCase("Search")) {
-                        EquipmentManager.search(in);
-                    } else if (input.equalsIgnoreCase("Select")) {
-                        Equipment e = EquipmentManager.select(in);
-                        if (e != null) {
-                            System.out.println(
-                                    "Enter 'Edit' to edit\n\t 'Delete' to delete\n\t 'Back' to go back");
-                            input = in.nextLine();
-
-                            if (input.equalsIgnoreCase("Edit")) {
-                                e.edit(in);
-                            } else if (input.equalsIgnoreCase("Delete")) {
-                                EquipmentManager.equipment.remove(e);
-                            } else {
-                                if (!input.equalsIgnoreCase("Back")) {
-                                    System.out.println("Error: invalid input");
-                                }
-                            }
-                        }
-
-                    } else if (input.equalsIgnoreCase("Back")) {
-                        break;
-
-                    } else {
-                        System.out.println("Error: invalid input");
-                    }
-                }
-            } else if (input.equalsIgnoreCase("Drone")) {
-                while (true) {
-                    System.out.println(
-                            "Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
-                    input = in.nextLine();
-
-                    if (input.equalsIgnoreCase("Display")) {
-                        DroneManager.displayAll();
-
-                    } else if (input.equalsIgnoreCase("Input")) {
-                        DroneManager.add(in);
-                    } else if (input.equalsIgnoreCase("Search")) {
-                        DroneManager.search(in);
-                    } else if (input.equalsIgnoreCase("Select")) {
-                        Drone d = DroneManager.select(in);
-                        if (d != null) {
-                            System.out.println(
-                                    "Enter 'Edit' to edit\n\t 'Delete' to delete\n\t 'Back' to go back");
-                            input = in.nextLine();
-
-                            if (input.equalsIgnoreCase("Edit")) {
-                                d.edit(in);
-                            } else if (input.equalsIgnoreCase("Delete")) {
-                                DroneManager.drones.remove(d);
-                            } else {
-                                if (!input.equalsIgnoreCase("Back")) {
-                                    System.out.println("Error: invalid input");
-                                }
-                            }
-                        }
-
-                    } else if (input.equalsIgnoreCase("Back")) {
-                        break;
-
-                    } else {
-                        System.out.println("Error: invalid input");
-                    }
-                }
-            } else if (input.equalsIgnoreCase("Orders")) {
-                while (true) {
-                    System.out.println(
-                            "Enter 'Display' to display all\n\t 'Input' to input new data\n\t'Edit' to edit existing data\n\t'Delete' to delete data\n\t'Search' to search data\n\t'Back' to go back");
-                    input = in.nextLine();
-
-                    if (input.equalsIgnoreCase("Display")) {
-                        OrderManager.displayAll();
-
-                    } else if (input.equalsIgnoreCase("Input")) {
-                        OrderManager.add(in);
-                    } else if (input.equalsIgnoreCase("Search")) {
-                        OrderManager.search(in);
-                    } else if (input.equalsIgnoreCase("Select")) {
-                        Order o = OrderManager.select(in);
-                        if (o != null) {
-                            System.out.println(
-                                    "Enter 'Edit' to edit\n\t 'Delete' to delete\n\t 'Back' to go back");
-                            input = in.nextLine();
-
-                            if (input.equalsIgnoreCase("Edit")) {
-                                o.edit(in);
-                            } else if (input.equalsIgnoreCase("Delete")) {
-                                OrderManager.orders.remove(o);
-                            } else {
-                                if (!input.equalsIgnoreCase("Back")) {
-                                    System.out.println("Error: invalid input");
-                                }
-                            }
-                        }
-
-                    } else if (input.equalsIgnoreCase("Back")) {
-                        break;
-
-                    } else {
-                        System.out.println("Error: invalid input");
-                    }
-                }
             } else {
-                System.out.println("Error: invalid input");
-            }
+                if (input.equalsIgnoreCase("Employee")) {
+                    currentClass = "Employee";
+                } else if (input.equalsIgnoreCase("Member")) {
+                    currentClass = "Member";
+                } else if (input.equalsIgnoreCase("Warehouse")) {
+                    currentClass = "Warehouse";
+                } else if (input.equalsIgnoreCase("Equipment")) {
+                    currentClass = "Equipment";
+                } else if (input.equalsIgnoreCase("Drone")) {
+                    currentClass = "Drone";
+                } else if (input.equalsIgnoreCase("Orders")) {
+                    currentClass = "Orders";
+                } else {
+                    System.out.print("Error: invalid input");
+                }
+
+                if(currentClass != null){
+                    while (true) {
+                        System.out.println("\tDisplay: Display all"
+                                + "\n\tInput: Input new data"
+                                + "\n\tSelect: Edit or delete existing data"
+                                + "\n\tSearch: Query data"
+                                + "\n\tBack: Return to main menu");
+                        input = in.nextLine();
+    
+                        if (input.equalsIgnoreCase("Display")) {
+                            QueryManager.display(conn, "SELECT * FROM " + currentClass);
+    
+                        } else if (input.equalsIgnoreCase("Input")) {
+                            QueryManager.add(in, conn, currentClass);
+    
+                        } else if (input.equalsIgnoreCase("Select")) {
+                            System.out.print("Enter Employee userID: ");
+                            input = in.nextLine();
+                            if(!QueryManager.select(in, conn, currentClass, " WHERE user_id =?", input)){
+                                System.out.println("Error: no employee with userID " + input);
+                            }      
+    
+                        } else if (input.equalsIgnoreCase("Search")) {
+                            query = "SELECT * FROM " + currentClass + " WHERE ";
+                            while(true){
+                                System.out.print("Enter search condition: ");    
+                                query += in.nextLine();
+    
+                                System.out.print("Enter 'C' to continue inputting conditions: ");
+                                input = in.nextLine();
+                                if(input.equalsIgnoreCase("C")){
+                                    query+= " AND ";
+                                } else {
+                                    break;
+                                }
+                            }
+                            System.out.println("Query is: " + query);
+                            QueryManager.display(conn, query);
+                            
+                        } else if (input.equalsIgnoreCase("Back")) {
+                            currentClass = null;
+                            break;
+
+                        } else {
+                            System.out.println("Error: invalid input");
+                        }
+                    }
+                }
+            }      
         }
 
         //Close opened resources and exit
