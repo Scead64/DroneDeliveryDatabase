@@ -61,7 +61,7 @@ public class QueryManager {
 
         try {
             //Get meta data
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM EMPLOYEE");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + table);
             ResultSet rSet = stmt.executeQuery();
             ResultSetMetaData rsmd = rSet.getMetaData();
             int columnCount = rsmd.getColumnCount();

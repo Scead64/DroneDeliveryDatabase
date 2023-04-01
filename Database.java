@@ -72,7 +72,7 @@ public class Database {
         } else if (currentClass == "Warehouse") {
             System.out.print("Enter Warehouse address: ");
             input = in.nextLine();
-            if(!QueryManager.select(in, conn, currentClass, " WHERE user_id =?", input)){
+            if(!QueryManager.select(in, conn, currentClass, " WHERE address =?", input)){
                 System.out.println("Error: no Warehouse with address " + input);
             }
 
