@@ -1,13 +1,8 @@
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Scanner;
-
-import ManagerClasses.UsefulReports;
 
 public class Database {
 
@@ -56,15 +51,59 @@ public class Database {
         }
         return conn;
     }
+    
+    //Gets the primary key given the current class
+    public static void select(Scanner in, Connection conn){
+        String input;
+        if (currentClass == "Employee") {
+            System.out.print("Enter Employee userID: ");
+            input = in.nextLine();
+            if(!QueryManager.select(in, conn, currentClass, " WHERE user_id =?", input)){
+                System.out.println("Error: no Employee with userID " + input);
+            }
+
+        } else if (currentClass == "Member") {
+            System.out.print("Enter Member userID: ");
+            input = in.nextLine();
+            if(!QueryManager.select(in, conn, currentClass, " WHERE user_id =?", input)){
+                System.out.println("Error: no Member with userID " + input);
+            }
+
+        } else if (currentClass == "Warehouse") {
+            System.out.print("Enter Warehouse address: ");
+            input = in.nextLine();
+            if(!QueryManager.select(in, conn, currentClass, " WHERE user_id =?", input)){
+                System.out.println("Error: no Warehouse with address " + input);
+            }
+
+        } else if (currentClass == "Equipment") {
+            System.out.print("Enter Equipment serial number: ");
+            input = in.nextLine();
+            if(!QueryManager.select(in, conn, currentClass, " WHERE serial_number =?", input)){
+                System.out.println("Error: no Equipment with serial_number " + input);
+            }
+
+        } else if (currentClass == "Drone") {
+            System.out.print("Enter Drone serial number: ");
+            input = in.nextLine();
+            if(!QueryManager.select(in, conn, currentClass, " WHERE serial_num =?", input)){
+                System.out.println("Error: no Drone with serial number " + input);
+            }
+
+        } else if (currentClass == "Orders") {
+            System.out.print("Enter Orders order number: ");
+            input = in.nextLine();
+            if(!QueryManager.select(in, conn, currentClass, " WHERE order_number =?", input)){
+                System.out.println("Error: no Order with order number " + input);
+            }
+
+        }
+    }
 
     public static void main(String[] args) {
 
         // SQL connection variables
         Connection conn = initializeDB(DATABASE);
-        PreparedStatement stmt = null;
-        ResultSet rSet = null;
-        ResultSetMetaData rsmd = null;
-        int columnCount;
 
         // I/O variables
         Scanner in = new Scanner(System.in);
@@ -171,12 +210,8 @@ public class Database {
                             QueryManager.add(in, conn, currentClass);
     
                         } else if (input.equalsIgnoreCase("Select")) {
-                            System.out.print("Enter Employee userID: ");
-                            input = in.nextLine();
-                            if(!QueryManager.select(in, conn, currentClass, " WHERE user_id =?", input)){
-                                System.out.println("Error: no employee with userID " + input);
-                            }      
-    
+                            select(in, conn);
+
                         } else if (input.equalsIgnoreCase("Search")) {
                             query = "SELECT * FROM " + currentClass + " WHERE ";
                             while(true){

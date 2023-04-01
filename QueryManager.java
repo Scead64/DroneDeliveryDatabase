@@ -126,20 +126,31 @@ public class QueryManager {
 
                 String input;
                 while(true){
-                    System.out.println("Enter 'Edit' to edit\n\t 'Delete' to delete\n\t 'Back' to go back");
+                    System.out.println("\tEdit: Change row"
+                                    + "\n\tDelete: Delete row"
+                                    + "\n\tBack: Return to table submenu");
                     input = in.nextLine();
+
                     if(input.equalsIgnoreCase("Edit")){
+                        String value;
                         System.out.print("Enter field to edit: ");
                         input = in.nextLine();
-                        
+                        System.out.print("Enter new value: ");
+                        value = in.nextLine();
+
+                        stmt = conn.prepareStatement("UPDATE " + table + " SET " + input + " = ?");
+                        stmt.setString(1, value);
+                        stmt.executeUpdate();
 
                     } else if(input.equalsIgnoreCase("Delete")){
                         stmt = conn.prepareStatement("DELETE FROM " + table + query);
                         stmt.setString(1, key);
                         stmt.executeUpdate();
                         break;
+
                     } else if(input.equalsIgnoreCase("Back")){
                         break;
+                        
                     } else {
                             System.out.println("Error: invalid input");
                     }
