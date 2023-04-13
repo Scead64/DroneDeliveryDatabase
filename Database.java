@@ -4,6 +4,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+/**
+ * @author Ronit, Josiah
+ * 
+ * This application manages the DroneDatabse.
+ * 
+ * Through this application, a user may "enter" a table where they can
+ * View, Insert, Update, Delete, and Query table entries.
+ * 
+ * There are also Useful Reports available for the user to view.
+ * 
+ */
 public class Database {
 
     //Database file name
@@ -52,9 +63,18 @@ public class Database {
         return conn;
     }
     
-    //Gets the primary key given the current class
+    /**
+     * Gets the primary key given the current class
+     *
+     * @param in
+     *            The scanner to take user input
+     * @param conn
+     *            The connection variable that is connected to the database
+     */
     public static void select(Scanner in, Connection conn){
         String input;
+
+        // Employee Case
         if (currentClass == "Employee") {
             System.out.print("Enter Employee userID: ");
             input = in.nextLine();
@@ -62,6 +82,7 @@ public class Database {
                 System.out.println("Error: no Employee with userID " + input);
             }
 
+        // Member Case
         } else if (currentClass == "Member") {
             System.out.print("Enter Member userID: ");
             input = in.nextLine();
@@ -69,6 +90,7 @@ public class Database {
                 System.out.println("Error: no Member with userID " + input);
             }
 
+        // Warehouse Case
         } else if (currentClass == "Warehouse") {
             System.out.print("Enter Warehouse address: ");
             input = in.nextLine();
@@ -76,6 +98,7 @@ public class Database {
                 System.out.println("Error: no Warehouse with address " + input);
             }
 
+        // Equipment Case
         } else if (currentClass == "Equipment") {
             System.out.print("Enter Equipment serial number: ");
             input = in.nextLine();
@@ -83,6 +106,7 @@ public class Database {
                 System.out.println("Error: no Equipment with serial_number " + input);
             }
 
+        // Drone Case
         } else if (currentClass == "Drone") {
             System.out.print("Enter Drone serial number: ");
             input = in.nextLine();
@@ -90,6 +114,7 @@ public class Database {
                 System.out.println("Error: no Drone with serial number " + input);
             }
 
+        // Orders Case
         } else if (currentClass == "Orders") {
             System.out.print("Enter Orders order number: ");
             input = in.nextLine();
@@ -97,6 +122,14 @@ public class Database {
                 System.out.println("Error: no Order with order number " + input);
             }
 
+        // Review Case
+        } else if (currentClass == "Review") {
+            System.out.print("Enter Review id: ");
+            input = in.nextLine();
+
+            if(!QueryManager.select(in, conn, currentClass, " WHERE review_id =?", input)){
+                System.out.println("Error: no Review with id " + input);
+            }
         }
     }
 
@@ -111,6 +144,8 @@ public class Database {
         
 
         System.out.println("Hello, welcome to Drone Delivery Services.");
+
+        // Main loop
         while (true) {
             System.out.println("Databases are:"
                     + "\n\tEmployee"
@@ -118,7 +153,8 @@ public class Database {
                     + "\n\tWarehouse"
                     + "\n\tEquipment"
                     + "\n\tDrone"
-                    + "\n\tOrders\n");
+                    + "\n\tOrders"
+                    + "\n\tReview\n");
             System.out.println(
                     "Useful Reports: \n\tRenting Checkouts\n\tMost Popular Item\n\tMost Popular Manufacturer\n\t"
                             + "Most Popular Drone\n\tItems Checked Out\n\tEquipment By Type\n");
@@ -177,7 +213,11 @@ public class Database {
                         System.out.println("Error: invalid input");
                     }
                 }
+
+            // Table cases
             } else {
+
+                // Set the current table
                 if (input.equalsIgnoreCase("Employee")) {
                     currentClass = "Employee";
                 } else if (input.equalsIgnoreCase("Member")) {
@@ -190,6 +230,8 @@ public class Database {
                     currentClass = "Drone";
                 } else if (input.equalsIgnoreCase("Orders")) {
                     currentClass = "Orders";
+                } else if (input.equalsIgnoreCase("Review")) {
+                    currentClass = "Review";
                 } else {
                     System.out.print("Error: invalid input");
                 }

@@ -7,8 +7,14 @@ import java.util.Scanner;
 
 public class QueryManager {
 
-    /*
-     * Displays all data currently in the table
+    /**
+     * Displays all data currently in the table via the given @param query
+     * 
+     * @param conn
+     *            The connection variable that is connected to the database
+     * 
+     * @param query
+     *            The string of SQL to be executed
      */
     public static void display(Connection conn, String query) {
         try {
@@ -52,11 +58,18 @@ public class QueryManager {
         System.out.println();
     }
 
-    /*
-     * Adds a new row to the table
+    /**
+     * Adds a new value to the given @table
+     * 
+     * @param in
+     *            The scanner to take user input
+     * @param conn
+     *            The connection variable that is connected to the database
+     * @param table
+     *            The table to which a row is being added
      */
     public static void add(Scanner in, Connection conn, String table) {
-        //String variable to keep track of user-inputted values
+        //String variables to keep track of user-inputted values
         String data, fields = "";
 
         try {
@@ -74,9 +87,13 @@ public class QueryManager {
                 }
             }
 
+            /**
+             * Set the prepared statement with the query "INSERT INTO @param table VALUES (?,?,..,?)"
+             */
+            
             stmt = conn.prepareStatement("INSERT INTO " + table + " VALUES (" + fields + ")");
 
-            //Get user input
+            //Get user input for each column in the table
             System.out.println();
             for (int i = 1; i <= columnCount; i++) {
                 String value = rsmd.getColumnName(i);
@@ -97,7 +114,20 @@ public class QueryManager {
         System.out.println();
     }
     
-    /*
+    /**
+     * Adds a new value to the given @table
+     * 
+     * @param in
+     *            The scanner to take user input
+     * @param conn
+     *            The connection variable that is connected to the database
+     * @param table
+     *            The table to which a row is being added
+     * @param query
+     *            The string of SQL to be executed
+     * @param key
+     *            The key attribute with which to query the data
+     * 
      * @returns true if the query gets a row and prints it, false otherwise
      */
     public static Boolean select(Scanner in, Connection conn, String table, String query, String key) {
